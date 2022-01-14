@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <!--直接定义属性-->
+    <!--logFile以/开头相对计算机目录，不以/开头该程序的根目录-->
+    <springProperty  scope="context" name="logPath" source="my.file.path" defaultValue="logdir"/>
+    <springProperty  scope="context" name="logName" source="my.file.name" defaultValue="bak"/>
+<!--    <property name="logName" value="search"/>-->
+    <property name="maxFileSize" value="100MB"/>
+
+    <!-- 格式化输出: %d: 日期; %-5level: 级别从左显示5个字符宽度; %thread: 线程名; %logger: 类名; %M: 方法名; %line: 行号; %msg: 日志消息; %n: 换行符 -->
+    <!-- 具体配置可参考   ch/qos/logback/classic/PatternLayout.java-->
+<!--    颜色
+    black               黑色的
+    red                 红色的
+    green               绿色
+    yellow              黄色的
+    blue                蓝色
+    magenta             品红
+    cyan                青色
+    white               白色的
+    gray                灰色的
+    boldRed             粗体红色
+    boldGreen           粗体绿色
+    boldYellow          粗体黄色
+    boldBlue            加粗蓝色
+    boldMagenta         大胆的洋红色
+    boldCyan            大胆的青色
+    boldWhite           大胆的白色
+    highlight           强调-->
+
+    <property name="allPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) [%-5thread] %highlight(%-5level) [%green(%-50.50class) %boldYellow(%M:%line)]  >>>
+     %cyan(%msg) %n"/>
+
+
+    <!--开控制台日志模板-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${allPattern}</pattern>
+            <!-- 控制台也要使用utf-8，不要使用gbk -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- RollingFileAppender:滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
+    <!-- 1.先按日期存日志，日期变了，将前一天的日志文件名重命名为xxx%日期%索引，新的日志仍然是sys.log -->
+    <!-- 2.如果日期没有变化，但是当前日志文件的大小超过1kb时，对当前日志进行分割 重名名 -->
+    <!--滚动日志模板-->
+    <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志文件存储路径，来自property设置-->
+        <file>${logPath}/${logName}.log</file>
+        <encoder>
+
+            <pattern>${allPattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--每天生成一个新的活动日志文件，旧的日志归档，后缀名为2019.08.12这种格式-->
+            <!--%d{yyyy-MM-dd,aux}以日期创建目录-->
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${logName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--活动日志文件最大值，超过这个值将产生新日志文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--只保留最近30天的日志-->
+            <maxHistory>60</maxHistory>
+            <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <!--日志拒绝策略-->
+        <!--日志级别为info以上，但我们不想打印warn类型的日志，那么按照下面的配置做-->
+        <!--也就是说过滤warn级别不打印-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>warn</level>
+            <!--onMatch表示匹配到级别的策略 DENY拒绝  ACCEPT接受-->
+            <onMatch>DENY</onMatch>
+            <!--未匹配到级别的策略 也就是除了warn级别之外的策略-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+    <!-- 控制台日志输出级别 -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="fileLog"/>
+    </root>
+    <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
+    <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+    <logger name="com.dong.demo.dao" level="DEBUG">
+        <appender-ref ref="fileLog" />
+    </logger>
+</configuration>

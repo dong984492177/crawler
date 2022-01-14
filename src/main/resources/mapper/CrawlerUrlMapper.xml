@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.demo.mapper.CrawlerUrlMapper">
+
+    <resultMap id="BaseResultMap" type="com.dong.demo.model.CrawlerUrl">
+            <result property="crawleId" column="crawle_id" jdbcType="INTEGER"/>
+            <result property="crawleName" column="crawle_name" jdbcType="VARCHAR"/>
+            <result property="urlText" column="url_text" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+            <result property="urlElement" column="url_element" jdbcType="VARCHAR"/>
+            <result property="urlGrade" column="url_grade" jdbcType="VARCHAR" />
+            <result property="crawleStatus" column="crawle_status" jdbcType="INTEGER"/>
+            <result property="crawleOrder" column="crawle_order" jdbcType="INTEGER"/>
+            <result property="errDescribe" column="err_describe" jdbcType="VARCHAR"/>
+            <result property="crawlerText" column="crawler_text" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        crawle_id,crawle_name,url_text,
+        url,url_element,url_grade,
+        crawle_status,crawle_order,err_describe,
+        crawler_text
+    </sql>
+</mapper>
