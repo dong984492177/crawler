@@ -12,6 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
 * @author DONG
 * @description 针对表【tutorials_node(爬虫一些教程 需要存放的路径信息)】的数据库操作Service实现
@@ -73,6 +77,44 @@ public class TutorialsNodeServiceImpl extends ServiceImpl<TutorialsNodeMapper, T
             redisUtils.hmSet(key, tutorialsNode.getName() , JSON.toJSONString(tutorialsNode));
         }
         return boon;
+    }
+
+
+    @Override
+    public List<TutorialsNode> getDbByCrawleId(int id) {
+        String key = "tutorialsMapping:hash"+ id;
+        List<TutorialsNode> tutorialsNodeList = list(new QueryWrapper<TutorialsNode>().eq("crawle_id", id).ne("parent_id", -1).orderByAsc("id"));
+        if (tutorialsNodeList.size()==0 ) {
+            log.info("tutorialsNode 没有数据 ");
+            return null;
+        }else{
+            for (TutorialsNode tutorialsNode : tutorialsNodeList) {
+                redisUtils.hmSet(key, tutorialsNode.getName() , JSON.toJSONString(tutorialsNode));
+            }
+        }
+        return tutorialsNodeList;
+    }
+
+    @Override
+    public List<TutorialsNode> getByCrawleId(int id) {
+        String key = "tutorialsMapping:hash"+ id;
+        List<TutorialsNode> tutorialsNodeList;
+        Set<Object> tutorialsNodeSet = redisUtils.hmGetAll(key);
+        //String tutorialsNodeStringJson = null;
+        if (tutorialsNodeSet.size()==0) {
+            tutorialsNodeList = getDbByCrawleId(id);
+        }else {
+            tutorialsNodeList = new ArrayList<>();
+            for (Object o : tutorialsNodeSet) {
+                String tutorialsNodeStr = (String) redisUtils.hmGet(key, o);
+                tutorialsNodeList.add(JSON.parseObject(tutorialsNodeStr.toString(),TutorialsNode.class));
+            }
+        }
+        if (tutorialsNodeList == null) {
+            log.info("tutorialsNode 没有数据 ");
+            return null;
+        }
+        return tutorialsNodeList;
     }
 
 

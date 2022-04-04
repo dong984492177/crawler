@@ -29,8 +29,7 @@
     boldWhite           大胆的白色
     highlight           强调-->
 
-    <property name="allPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) [%-5thread] %highlight(%-5level) [%green(%-50.50class) %boldYellow(%M:%line)]  >>>
-     %cyan(%msg) %n"/>
+    <property name="allPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) [%-5thread] %highlight(%-5level) [%green(%-50.50class) %boldYellow(%M:%line)]  >>> %cyan(%msg) %n"/>
 
 
     <!--开控制台日志模板-->
@@ -69,6 +68,7 @@
         <!--日志级别为info以上，但我们不想打印warn类型的日志，那么按照下面的配置做-->
         <!--也就是说过滤warn级别不打印-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
             <level>warn</level>
             <!--onMatch表示匹配到级别的策略 DENY拒绝  ACCEPT接受-->
             <onMatch>DENY</onMatch>
@@ -76,11 +76,34 @@
             <onMismatch>ACCEPT</onMismatch>
         </filter>
     </appender>
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${logName}_error.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${logName}_error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${allPattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>ERROR</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
     <!-- 控制台日志输出级别 -->
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="fileLog"/>
+        <appender-ref ref="file_error" />
     </root>
+
     <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <logger name="com.dong.demo.dao" level="DEBUG">

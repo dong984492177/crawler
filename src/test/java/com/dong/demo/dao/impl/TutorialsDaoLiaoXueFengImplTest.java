@@ -7,11 +7,13 @@ import com.dong.demo.service.CrawlerUrlService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
 class TutorialsDaoLiaoXueFengImplTest {
+    @Qualifier("TutorialsDaoLiaoXueFengImpl")
     @Autowired
     TutorialsDao tutorialsDao;
     @Autowired
@@ -24,7 +26,7 @@ class TutorialsDaoLiaoXueFengImplTest {
 
     @Test
     void crawlerNode() {
-        boolean b = tutorialsDao.crawlerNode(1);
+        boolean b = tutorialsDao.crawlerNode(1,"" );
         log.info(""+b);
     }
 }

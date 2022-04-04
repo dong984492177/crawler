@@ -64,6 +64,7 @@ public class TutorialsServiceImpl implements TutorialsService {
                     list = crawlerBookmarks(id, name, tutorialsDao, tutorialsNode);
                     break;
                 case 1 :
+                case 2 :
                     list = crawlerUrlService.getByIdAndName(id,name);
                     if (list.size()==0){
                         list = crawlerBookmarks(id, name, tutorialsDao, tutorialsNode);
@@ -96,13 +97,19 @@ public class TutorialsServiceImpl implements TutorialsService {
                 Document modelDoc = tutorialsDao.readModel();
                 //主要放body
                 Elements bodyElements = modelDoc.select("body");
-                //标题头其实无所谓的  用不上
+                //标题头
                 Element titleElement = modelDoc.selectFirst("title");
+                titleElement.text(name);
+
                 for (CrawlerUrl crawlerUrl :list){
                     bodyElements.append(crawlerUrl.getCrawlerText().toString());
                 }
                 try {
                     tutorialsDao.writeHTML(name, tutorialsMapping.getName(), modelDoc);
+                    tutorialsDao.writeMd(name ,tutorialsMapping.getName());
+                    tutorialsNode.setTutorialsStatus(2);
+                    tutorialsNodeService.saveOrUpdateByName(tutorialsNode);
+                    return true;
                 } catch (IOException e) {
                     log.error("写文件异常",e);
                 }
@@ -113,6 +120,8 @@ public class TutorialsServiceImpl implements TutorialsService {
 
         return false;
     }
+
+
 
     private List<CrawlerUrl> crawlerBookmarks(int id, String name, TutorialsDao tutorialsDao, TutorialsNode tutorialsNode) {
         List<CrawlerUrl> list;
@@ -132,5 +141,25 @@ public class TutorialsServiceImpl implements TutorialsService {
         return list;
     }
 
+    @Override
+    public boolean crawlerNode(int id, String appendStr) {
+        TutorialsDao tutorialsDao = getDaoById(id);
+        return tutorialsDao.crawlerNode(id, appendStr);
+    }
+
+    /**
+     * 通过id 获得对应的DAO接口
+     * @param id
+     * @return
+     */
+    private TutorialsDao getDaoById(int id) {
+        TutorialsMapping tutorialsMapping = tutorialsMappingService.getById(id);
+        if (tutorialsMapping == null) {
+            return null;
+        }
+        String mappingClass = tutorialsMapping.getMappingClass();
+        TutorialsDao tutorialsDao = map.get(mappingClass);
+        return tutorialsDao;
+    }
 
 }

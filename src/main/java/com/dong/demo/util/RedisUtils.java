@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -155,9 +156,19 @@ public class RedisUtils {
      * @param value
      */
     public void hmSet(String key, Object hashKey, Object value) {
-        log.info("key " +key +" hashKey " +hashKey);
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.put(key, hashKey, value);
+    }
+    /**
+     * @description: 通过redisKey 批量(map)设置redisValue(hash)
+     * @param: [redisKey, redisValue]
+     * @return: void
+     * @author: Xue 8
+     * @date: 2019/2/14
+     */
+    public void setHashAll(String redisKey, Map<String,Object> redisValue){
+        HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
+        hash.putAll(redisKey, redisValue);
     }
 
     /**
@@ -194,6 +205,22 @@ public class RedisUtils {
         return hash.delete(key, hashKey);
     }
 
+    /**
+     * 哈希删除键的所有值
+     * @param key
+     * @return
+     */
+    public boolean hmRemoveAll(String key){
+        try {
+            Set<Object> objects = hmGetAll(key);
+            for (Object object : objects) {
+                hmRemoveByKey(key,object);
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 
 
     /**
@@ -240,6 +267,20 @@ public class RedisUtils {
     public Set<Object> setMembers(String key) {
         SetOperations<String, Object> set = redisTemplate.opsForSet();
         return set.members(key);
+    }
+    /**
+     * 缓存Set
+     *
+     * @param key     缓存键值
+     * @param dataSet 缓存的数据
+     * @return 缓存数据的对象
+     */
+    public BoundSetOperations<String, Object> setCacheSet(String key, Set<Object> dataSet) {
+        BoundSetOperations<String, Object> setOperation = redisTemplate.boundSetOps(key);
+        for (Object o : dataSet) {
+            setOperation.add(o);
+        }
+        return setOperation;
     }
 
     /**

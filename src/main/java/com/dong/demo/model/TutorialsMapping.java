@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 教程爬虫 映射类
@@ -35,6 +36,11 @@ public class TutorialsMapping implements Serializable {
      */
     private String url;
 
+    /**
+     * 1,ALL 全站爬虫 ,2 By where ,有条件的爬虫,
+     */
+    private Integer crawlertype;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +59,8 @@ public class TutorialsMapping implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getMappingClass() == null ? other.getMappingClass() == null : this.getMappingClass().equals(other.getMappingClass()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()));
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getCrawlertype() == null ? other.getCrawlertype() == null : this.getCrawlertype().equals(other.getCrawlertype()));
     }
 
     @Override
@@ -64,6 +71,7 @@ public class TutorialsMapping implements Serializable {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getMappingClass() == null) ? 0 : getMappingClass().hashCode());
         result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getCrawlertype() == null) ? 0 : getCrawlertype().hashCode());
         return result;
     }
 
@@ -77,6 +85,7 @@ public class TutorialsMapping implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", mappingClass=").append(mappingClass);
         sb.append(", url=").append(url);
+        sb.append(", crawlertype=").append(crawlertype);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

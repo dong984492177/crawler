@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 爬虫一些教程 需要存放的路径信息
@@ -36,7 +37,7 @@ public class TutorialsNode implements Serializable {
     private Integer parentId;
 
     /**
-     * 教程状态 0 初始重新爬虫 1 已获得书签 
+     * 教程状态 0 初始重新爬虫 1 已获得书签 2已完成
      */
     private Integer tutorialsStatus;
 

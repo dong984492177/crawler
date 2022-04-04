@@ -2,12 +2,13 @@ spring:
   datasource:
     username: dong
     password: mysql.9844
-    url: jdbc:mysql://101.43.49.117:3306/dong?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/dong?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource  # 使用 DruidDataSource作为数据源
 my:
   file:
-    path: /file/Logs/demo
-    name: bad
+    path: /file/Logs/
+    name: crawler
 crawler:
   path: /file/crawler
+  md-path: /file/md

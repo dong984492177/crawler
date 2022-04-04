@@ -14,6 +14,15 @@ import java.util.List;
  */
 
 public interface TutorialsDao {
+
+    /**
+     * 去爬节点,一个网站有很多教程
+     * @param id 项目对应的id
+     * @param appendStr 追加条件,部分会用到
+     * @return
+     */
+    public boolean crawlerNode(int id, String appendStr);
+
     /**
      * 爬虫获得教程书签
      * @param url 爬教链接
@@ -52,5 +61,15 @@ public interface TutorialsDao {
      */
     public void writeHTML(String name, String mappingName, Document modelDoc) throws IOException;
 
-    public boolean crawlerNode(int id);
+    /**
+     * 写md文件
+     * 用的 node 的 h2m 项目 ,不知道如何实现调用,只能命令行
+     * npm install h2m -g
+     * @param name 教程名
+     * @param mappingName 爬虫项目名
+     * @throws IOException
+     */
+    public void writeMd(String name, String mappingName) throws IOException;
+
+
 }

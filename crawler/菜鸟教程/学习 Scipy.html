@@ -1,0 +1,1445 @@
+<!doctype html>
+<html xmlns:itranswarp="http://www.itranswarp.com/" xmlns:wb="https://open.weibo.com/wb" lang="zh_CN"> <!--
+--> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>学习 Scipy</title> 
+ </head> 
+ <body>  
+  <h2>学习 Scipy 基础</h2> 
+  <h3 href="https://www.runoob.com/scipy/scipy-tutorial.html"> SciPy 教程 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 教程</b> 
+    <div class="tutintro"> 
+     <p><img width="128px" src="https://www.runoob.com/wp-content/uploads/2021/07/scipy-logo-300.png"></p> 
+     <p>SciPy 是一个开源的 Python 算法库和数学工具包。</p> 
+     <p>Scipy 是基于 Numpy 的科学计算库，用于数学、科学、工程学等领域，很多有一些高阶抽象和物理模型需要使用 Scipy。</p> 
+     <p>SciPy 包含的模块有最优化、线性代数、积分、插值、特殊函数、快速傅里叶变换、信号处理和图像处理、常微分方程求解和其他科学与工程中常用的计算。</p> 
+    </div> 
+    <hr><b>学习本教程前你需要了解</b> 
+    <p>在开学习 SciPy 教程之前，我们需要具备基本的 Python 基础，如果你对 Python 还不了解，可以阅读我们的教程：</p> 
+    <ul> 
+     <li> <a href="https://www.runoob.com/python3/python3-tutorial.html" rel="noopener" target="_blank">Python 3.x 教程</a> </li> 
+     <li> <a href="https://www.runoob.com/numpy/numpy-tutorial.html" rel="noopener" target="_blank">Numpy 教程</a> </li> 
+    </ul> 
+    <hr><b>SciPy 应用</b> 
+    <p>Scipy 是一个用于数学、科学、工程领域的常用软件包，可以处理最优化、线性代数、积分、插值、拟合、特殊函数、快速傅里叶变换、信号处理、图像处理、常微分方程求解器等。 。</p> 
+    <p>SciPy 包含的模块有最优化、线性代数、积分、插值、特殊函数、快速傅里叶变换、信号处理和图像处理、常微分方程求解和其他科学与工程中常用的计算。</p> 
+    <p> NumPy 和 SciPy 的协同工作可以高效解决很多问题，在天文学、生物学、气象学和气候科学，以及材料科学等多个学科得到了广泛应用。</p> 
+    <hr><b>相关链接</b> 
+    <ul> 
+     <li> NumPy 官网 <a href="http://www.numpy.org/" rel="noopener" target="_blank">http://www.numpy.org/</a></li> 
+     <li> NumPy 源代码：<a href="https://github.com/numpy/numpy" rel="noopener" target="_blank">https://github.com/numpy/numpy</a></li> 
+     <li> SciPy 官网：<a href="https://www.scipy.org/" rel="noopener" target="_blank">https://www.scipy.org/</a></li> 
+     <li> SciPy 源代码：<a href="https://github.com/scipy/scipy" rel="noopener" target="_blank">https://github.com/scipy/scipy</a></li> 
+     <li> Matplotlib 官网：<a href="https://matplotlib.org/" rel="noopener" target="_blank">https://matplotlib.org/</a></li> 
+     <li> Matplotlib 源代码：<a href="https://github.com/matplotlib/matplotlib" rel="noopener" target="_blank">https://github.com/matplotlib/matplotlib</a></li> 
+    </ul> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-install.html"> SciPy 安装 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 安装</b> 
+    <p>本章节，我们使用 pip 工具来安装 SciPy 库，如果还未安装该工具，可以参考 <a href="https://www.runoob.com/w3cnote/python-pip-install-usage.html" rel="noopener" target="_blank">Python pip 安装与使用</a>。 </p> 
+    <p>升级 pip：</p> 
+    <pre>python3 -m pip install -U pip</pre> 
+    <p>安装 scipy 库：</p> 
+    <pre>python3 -m pip install -U scipy</pre> 
+    <p> 安装完成后，我们就可以通过 <span class="marked">from scipy import module</span> 来导入 scipy 的库：</p> 
+    <p>constants 是 scipy 的常量模块。</p> 
+    <div class="example"> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+</pre> 
+    </div> 
+    <p> 以下实例，我们通过导入 scipy 库，然后查看 scipy 库的版本号：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> scipy<br>
+<br>
+<span>print</span><span>(</span>scipy.__version__<span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>1.7.0</pre> 
+    <p> 以下实例，我们通过导入 scipy 的常量模块 constants 来查看一英亩等于多少平方米：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span># 一英亩等于多少平方米</span><br>
+<span>print</span><span>(</span>constants.<span>acre</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>4046.8564223999992</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-module.html"> SciPy 模块列表 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 模块列表</b> 
+    <p>以下列出了 SciPy 常用的一些模块及官网 API 地址：</p> 
+    <table class="reference"> 
+     <thead> 
+      <tr> 
+       <th>模块名</th> 
+       <th>功能</th> 
+       <th>参考文档</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td>scipy.cluster</td> 
+       <td>向量量化</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/cluster.html" rel="noopener" target="_blank">cluster API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.constants</td> 
+       <td>数学常量</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/constants.html" rel="noopener" target="_blank">constants API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.fft</td> 
+       <td>快速傅里叶变换</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/fft.html" rel="noopener" target="_blank">fft API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.integrate</td> 
+       <td>积分</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/integrate.html" rel="noopener" target="_blank">integrate API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.interpolate</td> 
+       <td>插值</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/interpolate.html" rel="noopener" target="_blank">interpolate API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.io</td> 
+       <td>数据输入输出</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/io.html" rel="noopener" target="_blank">io API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.linalg</td> 
+       <td>线性代数</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/linalg.html" rel="noopener" target="_blank">linalg API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.misc</td> 
+       <td>图像处理</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/misc.html" rel="noopener" target="_blank">misc API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.ndimage</td> 
+       <td>N 维图像</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/ndimage.html" rel="noopener" target="_blank">ndimage API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.odr</td> 
+       <td>正交距离回归</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/odr.html" rel="noopener" target="_blank">odr API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.optimize</td> 
+       <td>优化算法</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/optimize.html" rel="noopener" target="_blank">optimize API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.signal</td> 
+       <td>信号处理</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/signal.html" rel="noopener" target="_blank">signal API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.sparse</td> 
+       <td>稀疏矩阵</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/sparse.html" rel="noopener" target="_blank">sparse API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.spatial</td> 
+       <td>空间数据结构和算法</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/spatial.html" rel="noopener" target="_blank">spatial API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy.special</td> 
+       <td>特殊数学函数</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/special.html" rel="noopener" target="_blank">special API</a></td> 
+      </tr> 
+      <tr> 
+       <td>scipy/stats</td> 
+       <td>统计函数</td> 
+       <td><a href="https://docs.scipy.org/doc/scipy/reference/stats.mstats.html" rel="noopener" target="_blank">stats.mstats API</a></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <blockquote> 
+     <p>更多模块内容可以参考官方文档：<a href="https://docs.scipy.org/doc/scipy/reference/" rel="noopener" target="_blank">https://docs.scipy.org/doc/scipy/reference/</a></p> 
+    </blockquote> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-constants.html"> SciPy 常量模块 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 常量模块</b> 
+    <script async src="https://cdn.staticfile.org/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script> 
+    <p> SciPy 常量模块 <span class="marked">constants</span> 提供了许多内置的数学常数。</p> 
+    <p>圆周率是一个数学常数，为一个圆的周长和其直径的比率，近似值约等于 3.14159，常用符号 <img src="https://static.runoob.com/images/mix/9be4ba0bb8df3af72e90a0535fabcc17431e540a.svg"> 来表示。</p> 
+    <p> 以下实例输出圆周率：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>pi</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>3.141592653589793</pre> 
+    <p> 以下实例输出黄金比例：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>golden</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>1.618033988749895</pre> 
+    <p> 我们可以使用 <span class="marked">dir()</span> 函数来查看 <strong>constants</strong> 模块包含了哪些常量：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span><span>dir</span><span>(</span>constants<span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>['Avogadro', 'Boltzmann', 'Btu', ...]</pre> 
+    <hr> <b>单位类型</b> 
+    <p> 常量模块包含以下几种单位：</p> 
+    <ul> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Metric">公制单位</a> </li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Binary">二进制，以字节为单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Mass">质量单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Angle">角度换算</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Time">时间单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Length">长度单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Pressure">压强单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Volume">体积单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Speed">速度单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Temperature">温度单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Energy">能量单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Power">功率单位</a></li> 
+     <li><a href="https://www.runoob.com/scipy/scipy-constants.html#Force">力学单位</a></li> 
+    </ul> <b id="Metric">国际单位制词头</b> 
+    <p> 国际单位制词头（英语：SI prefix）表示单位的倍数和分数，目前有 20 个词头，大多数是千的整数次幂。 (centi 返回 0.01)：</p> 
+    <table class="reference"> 
+     <colgroup> 
+      <col style="width: 16%"> 
+      <col style="width: 84%"> 
+     </colgroup> 
+     <tbody> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">yotta</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">1024</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">zetta</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">1021</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">exa</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">1018</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">peta</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">1015</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">tera</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">1012</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">giga</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">109</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">mega</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">106</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">kilo</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">103</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">hecto</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">102</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">deka</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">101</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">deci</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−1</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">centi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−2</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">milli</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−3</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">micro</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−6</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">nano</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−9</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">pico</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−12</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">femto</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−15</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">atto</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−18</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">zepto</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">10−21</span></p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>yotta</span><span>)</span> &nbsp; &nbsp;<span>#1e+24</span><br>
+<span>print</span><span>(</span>constants.<span>zetta</span><span>)</span> &nbsp; &nbsp;<span>#1e+21</span><br>
+<span>print</span><span>(</span>constants.<span>exa</span><span>)</span> &nbsp; &nbsp; &nbsp;<span>#1e+18</span><br>
+<span>print</span><span>(</span>constants.<span>peta</span><span>)</span> &nbsp; &nbsp; <span>#1000000000000000.0</span><br>
+<span>print</span><span>(</span>constants.<span>tera</span><span>)</span> &nbsp; &nbsp; <span>#1000000000000.0</span><br>
+<span>print</span><span>(</span>constants.<span>giga</span><span>)</span> &nbsp; &nbsp; <span>#1000000000.0</span><br>
+<span>print</span><span>(</span>constants.<span>mega</span><span>)</span> &nbsp; &nbsp; <span>#1000000.0</span><br>
+<span>print</span><span>(</span>constants.<span>kilo</span><span>)</span> &nbsp; &nbsp; <span>#1000.0</span><br>
+<span>print</span><span>(</span>constants.<span>hecto</span><span>)</span> &nbsp; &nbsp;<span>#100.0</span><br>
+<span>print</span><span>(</span>constants.<span>deka</span><span>)</span> &nbsp; &nbsp; <span>#10.0</span><br>
+<span>print</span><span>(</span>constants.<span>deci</span><span>)</span> &nbsp; &nbsp; <span>#0.1</span><br>
+<span>print</span><span>(</span>constants.<span>centi</span><span>)</span> &nbsp; &nbsp;<span>#0.01</span><br>
+<span>print</span><span>(</span>constants.<span>milli</span><span>)</span> &nbsp; &nbsp;<span>#0.001</span><br>
+<span>print</span><span>(</span>constants.<span>micro</span><span>)</span> &nbsp; &nbsp;<span>#1e-06</span><br>
+<span>print</span><span>(</span>constants.<span>nano</span><span>)</span> &nbsp; &nbsp; <span>#1e-09</span><br>
+<span>print</span><span>(</span>constants.<span>pico</span><span>)</span> &nbsp; &nbsp; <span>#1e-12</span><br>
+<span>print</span><span>(</span>constants.<span>femto</span><span>)</span> &nbsp; &nbsp;<span>#1e-15</span><br>
+<span>print</span><span>(</span>constants.<span>atto</span><span>)</span> &nbsp; &nbsp; <span>#1e-18</span><br>
+<span>print</span><span>(</span>constants.<span>zepto</span><span>)</span> &nbsp; &nbsp;<span>#1e-21</span><br>
+</pre> 
+    </div> <b id="Binary">二进制前缀</b> 
+    <p>返回字节单位 (kibi 返回 1024)。</p> 
+    <table class="reference"> 
+     <colgroup> 
+      <col style="width: 16%"> 
+      <col style="width: 84%"> 
+     </colgroup> 
+     <tbody> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">kibi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">210</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">mebi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">220</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">gibi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">230</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">tebi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">240</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">pebi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">250</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">exbi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">260</span></p></td> 
+      </tr> 
+      <tr class="row-odd"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">zebi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">270</span></p></td> 
+      </tr> 
+      <tr class="row-even"> 
+       <td><p><code class="docutils literal notranslate"><span class="pre">yobi</span></code></p></td> 
+       <td><p><span class="math notranslate nohighlight">280</span></p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>kibi</span><span>)</span> &nbsp; &nbsp;<span>#1024</span><br>
+<span>print</span><span>(</span>constants.<span>mebi</span><span>)</span> &nbsp; &nbsp;<span>#1048576</span><br>
+<span>print</span><span>(</span>constants.<span>gibi</span><span>)</span> &nbsp; &nbsp;<span>#1073741824</span><br>
+<span>print</span><span>(</span>constants.<span>tebi</span><span>)</span> &nbsp; &nbsp;<span>#1099511627776</span><br>
+<span>print</span><span>(</span>constants.<span>pebi</span><span>)</span> &nbsp; &nbsp;<span>#1125899906842624</span><br>
+<span>print</span><span>(</span>constants.<span>exbi</span><span>)</span> &nbsp; &nbsp;<span>#1152921504606846976</span><br>
+<span>print</span><span>(</span>constants.<span>zebi</span><span>)</span> &nbsp; &nbsp;<span>#1180591620717411303424</span><br>
+<span>print</span><span>(</span>constants.<span>yobi</span><span>)</span> &nbsp; &nbsp;<span>#1208925819614629174706176</span><br>
+</pre> 
+    </div> <b id="Mass">质量单位</b> 
+    <p>返回多少千克 <strong>kg</strong>。(gram 返回 0.001)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>gram</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.001</span><br>
+<span>print</span><span>(</span>constants.<span>metric_ton</span><span>)</span> &nbsp;<span>#1000.0</span><br>
+<span>print</span><span>(</span>constants.<span>grain</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#6.479891e-05</span><br>
+<span>print</span><span>(</span>constants.<span>lb</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.45359236999999997</span><br>
+<span>print</span><span>(</span>constants.<span>pound</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#0.45359236999999997</span><br>
+<span>print</span><span>(</span>constants.<span>oz</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.028349523124999998</span><br>
+<span>print</span><span>(</span>constants.<span>ounce</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#0.028349523124999998</span><br>
+<span>print</span><span>(</span>constants.<span>stone</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#6.3502931799999995</span><br>
+<span>print</span><span>(</span>constants.<span>long_ton</span><span>)</span> &nbsp; &nbsp;<span>#1016.0469088</span><br>
+<span>print</span><span>(</span>constants.<span>short_ton</span><span>)</span> &nbsp; <span>#907.1847399999999</span><br>
+<span>print</span><span>(</span>constants.<span>troy_ounce</span><span>)</span> &nbsp;<span>#0.031103476799999998</span><br>
+<span>print</span><span>(</span>constants.<span>troy_pound</span><span>)</span> &nbsp;<span>#0.37324172159999996</span><br>
+<span>print</span><span>(</span>constants.<span>carat</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#0.0002</span><br>
+<span>print</span><span>(</span>constants.<span>atomic_mass</span><span>)</span> <span>#1.66053904e-27</span><br>
+<span>print</span><span>(</span>constants.<span>m_u</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#1.66053904e-27</span><br>
+<span>print</span><span>(</span>constants.<span>u</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#1.66053904e-27</span><br>
+</pre> 
+    </div> <b id="Angle">角度单位</b> 
+    <p>返回弧度 (degree 返回 0.017453292519943295)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>degree</span><span>)</span> &nbsp; &nbsp; <span>#0.017453292519943295</span><br>
+<span>print</span><span>(</span>constants.<span>arcmin</span><span>)</span> &nbsp; &nbsp; <span>#0.0002908882086657216</span><br>
+<span>print</span><span>(</span>constants.<span>arcminute</span><span>)</span> &nbsp;<span>#0.0002908882086657216</span><br>
+<span>print</span><span>(</span>constants.<span>arcsec</span><span>)</span> &nbsp; &nbsp; <span>#4.84813681109536e-06</span><br>
+<span>print</span><span>(</span>constants.<span>arcsecond</span><span>)</span> &nbsp;<span>#4.84813681109536e-06</span><br>
+</pre> 
+    </div> <b id="Time">时间单位</b> 
+    <p>返回秒数(hour 返回 3600.0)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>minute</span><span>)</span> &nbsp; &nbsp; &nbsp;<span>#60.0</span><br>
+<span>print</span><span>(</span>constants.<span>hour</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#3600.0</span><br>
+<span>print</span><span>(</span>constants.<span>day</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#86400.0</span><br>
+<span>print</span><span>(</span>constants.<span>week</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#604800.0</span><br>
+<span>print</span><span>(</span>constants.<span>year</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#31536000.0</span><br>
+<span>print</span><span>(</span>constants.<span>Julian_year</span><span>)</span> <span>#31557600.0</span><br>
+</pre> 
+    </div> <b id="Length">长度单位</b> 
+    <p>返回米数(nautical_mile 返回 1852.0)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>inch</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.0254</span><br>
+<span>print</span><span>(</span>constants.<span>foot</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.30479999999999996</span><br>
+<span>print</span><span>(</span>constants.<span>yard</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.9143999999999999</span><br>
+<span>print</span><span>(</span>constants.<span>mile</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#1609.3439999999998</span><br>
+<span>print</span><span>(</span>constants.<span>mil</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#2.5399999999999997e-05</span><br>
+<span>print</span><span>(</span>constants.<span>pt</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.00035277777777777776</span><br>
+<span>print</span><span>(</span>constants.<span>point</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#0.00035277777777777776</span><br>
+<span>print</span><span>(</span>constants.<span>survey_foot</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#0.3048006096012192</span><br>
+<span>print</span><span>(</span>constants.<span>survey_mile</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#1609.3472186944373</span><br>
+<span>print</span><span>(</span>constants.<span>nautical_mile</span><span>)</span> &nbsp; &nbsp; <span>#1852.0</span><br>
+<span>print</span><span>(</span>constants.<span>fermi</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#1e-15</span><br>
+<span>print</span><span>(</span>constants.<span>angstrom</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#1e-10</span><br>
+<span>print</span><span>(</span>constants.<span>micron</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#1e-06</span><br>
+<span>print</span><span>(</span>constants.<span>au</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#149597870691.0</span><br>
+<span>print</span><span>(</span>constants.<span>astronomical_unit</span><span>)</span> <span>#149597870691.0</span><br>
+<span>print</span><span>(</span>constants.<span>light_year</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#9460730472580800.0</span><br>
+<span>print</span><span>(</span>constants.<span>parsec</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#3.0856775813057292e+16</span><br>
+</pre> 
+    </div> <b id="Pressure">压强单位</b> 
+    <p>返回多少帕斯卡，压力的 SI 制单位。(psi 返回 6894.757293168361)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>atm</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#101325.0</span><br>
+<span>print</span><span>(</span>constants.<span>atmosphere</span><span>)</span> &nbsp;<span>#101325.0</span><br>
+<span>print</span><span>(</span>constants.<span>bar</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#100000.0</span><br>
+<span>print</span><span>(</span>constants.<span>torr</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#133.32236842105263</span><br>
+<span>print</span><span>(</span>constants.<span>mmHg</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#133.32236842105263</span><br>
+<span>print</span><span>(</span>constants.<span>psi</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#6894.757293168361</span><br>
+</pre> 
+    </div> <b id="Area">面积单位</b> 
+    <p>返回多少平方米，平方米是面积的公制单位，其定义是：<strong>在一平面上，边长为一米的正方形之面积</strong>。(hectare 返回 10000.0)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>hectare</span><span>)</span> <span>#10000.0</span><br>
+<span>print</span><span>(</span>constants.<span>acre</span><span>)</span> &nbsp; &nbsp;<span>#4046.8564223999992</span><br>
+</pre> 
+    </div> <b id="Volume">体积单位</b> 
+    <p>返回多少立方米，立方米容量计量单位，1 立方米的容量相当于一个长、宽、高都等于 1 米的立方体的体积，与 1 公秉和 1 度水的容积相等，也与1000000立方厘米的体积相等。(liter 返回 0.001)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>liter</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.001</span><br>
+<span>print</span><span>(</span>constants.<span>litre</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.001</span><br>
+<span>print</span><span>(</span>constants.<span>gallon</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#0.0037854117839999997</span><br>
+<span>print</span><span>(</span>constants.<span>gallon_US</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.0037854117839999997</span><br>
+<span>print</span><span>(</span>constants.<span>gallon_imp</span><span>)</span> &nbsp; &nbsp; &nbsp; <span>#0.00454609</span><br>
+<span>print</span><span>(</span>constants.<span>fluid_ounce</span><span>)</span> &nbsp; &nbsp; &nbsp;<span>#2.9573529562499998e-05</span><br>
+<span>print</span><span>(</span>constants.<span>fluid_ounce_US</span><span>)</span> &nbsp; <span>#2.9573529562499998e-05</span><br>
+<span>print</span><span>(</span>constants.<span>fluid_ounce_imp</span><span>)</span> &nbsp;<span>#2.84130625e-05</span><br>
+<span>print</span><span>(</span>constants.<span>barrel</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#0.15898729492799998</span><br>
+<span>print</span><span>(</span>constants.<span>bbl</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.15898729492799998</span><br>
+</pre> 
+    </div> <b id="Speed">速度单位</b> 
+    <p>返回每秒多少米。(speed_of_sound 返回 340.5)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>kmh</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.2777777777777778</span><br>
+<span>print</span><span>(</span>constants.<span>mph</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#0.44703999999999994</span><br>
+<span>print</span><span>(</span>constants.<span>mach</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#340.5</span><br>
+<span>print</span><span>(</span>constants.<span>speed_of_sound</span><span>)</span> <span>#340.5</span><br>
+<span>print</span><span>(</span>constants.<span>knot</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#0.5144444444444445</span><br>
+</pre> 
+    </div> <b id="Temperature">温度单位</b> 
+    <p>返回多少开尔文。(zero_Celsius 返回 273.15)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>zero_Celsius</span><span>)</span> &nbsp; &nbsp; &nbsp;<span>#273.15</span><br>
+<span>print</span><span>(</span>constants.<span>degree_Fahrenheit</span><span>)</span> <span>#0.5555555555555556</span><br>
+</pre> 
+    </div> <b id="Energy">能量单位</b> 
+    <p>返回多少焦耳，焦耳（简称焦）是国际单位制中能量、功或热量的导出单位，符号为J。(calorie 返回 4.184)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>zero_Celsius</span><span>)</span> &nbsp; &nbsp; &nbsp;<span>#273.15</span><br>
+<span>print</span><span>(</span>constants.<span>degree_Fahrenheit</span><span>)</span> <span>#0.5555555555555556</span><br>
+</pre> 
+    </div> <b id="Power">功率单位</b> 
+    <p>返回多少瓦特，瓦特（符号：W）是国际单位制的功率单位。1瓦特的定义是1焦耳/秒（1 J/s），即每秒钟转换，使用或耗散的（以安培为量度的）能量的速率。(horsepower 返回 745.6998715822701)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>hp</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; <span>#745.6998715822701</span><br>
+<span>print</span><span>(</span>constants.<span>horsepower</span><span>)</span> <span>#745.6998715822701</span><br>
+</pre> 
+    </div> <b id="Force">力学单位</b> 
+    <p>返回多少牛顿，牛顿（符号为N，英语：Newton）是一种物理量纲，是力的公制单位。它是以建立经典力学（经典力学）的艾萨克·牛顿命名。。(kilogram_force 返回 9.80665)。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> constants<br>
+<br>
+<span>print</span><span>(</span>constants.<span>dyn</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#1e-05</span><br>
+<span>print</span><span>(</span>constants.<span>dyne</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>#1e-05</span><br>
+<span>print</span><span>(</span>constants.<span>lbf</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#4.4482216152605</span><br>
+<span>print</span><span>(</span>constants.<span>pound_force</span><span>)</span> &nbsp; &nbsp; <span>#4.4482216152605</span><br>
+<span>print</span><span>(</span>constants.<span>kgf</span><span>)</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span>#9.80665</span><br>
+<span>print</span><span>(</span>constants.<span>kilogram_force</span><span>)</span> &nbsp;<span>#9.80665</span><br>
+</pre> 
+    </div> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-optimize.html"> SciPy 优化器 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 优化器</b> 
+    <p> SciPy 的 optimize 模块提供了常用的最优化算法函数实现，我们可以直接调用这些函数完成我们的优化问题，比如查找函数的最小值或方程的根等。</p> 
+    <p>NumPy 能够找到多项式和线性方程的根，但它无法找到非线性方程的根，如下所示：</p> 
+    <pre>x + cos(x)</pre> 
+    <p>因此我们可以使用 SciPy 的 optimze.root 函数，这个函数需要两个参数：</p> 
+    <ul> 
+     <li> fun - 表示方程的函数。 </li> 
+     <li> x0 - 根的初始猜测。 </li> 
+    </ul> 
+    <p>该函数返回一个对象，其中包含有关解决方案的信息。</p> 
+    <p>实际解决方案在返回对象的属性 x ，查看如下实例：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>查找 x + cos(x) 方程的根:</p> 
+     <pre class="example_code"><span>from</span> scipy.<span>optimize</span> <span>import</span> root<br>
+<span>from</span> <span>math</span> <span>import</span> cos<br>
+<br>
+<span>def</span> eqn<span>(</span>x<span>)</span>:<br>
+&nbsp; <span>return</span> x + cos<span>(</span>x<span>)</span><br>
+<br>
+myroot <span>=</span> root<span>(</span>eqn<span>,</span> <span>0</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>myroot.<span>x</span><span>)</span><br>
+<span># 查看更多信息</span><br>
+<span>#print(myroot)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>-0.73908513]</pre> 
+    <p>看更多信息：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>optimize</span> <span>import</span> root<br>
+<span>from</span> <span>math</span> <span>import</span> cos<br>
+<br>
+<span>def</span> eqn<span>(</span>x<span>)</span>:<br>
+&nbsp; <span>return</span> x + cos<span>(</span>x<span>)</span><br>
+<br>
+myroot <span>=</span> root<span>(</span>eqn<span>,</span> <span>0</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>myroot<span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>
+    fjac: array([[-1.]])
+     fun: array([0.])
+ message: 'The solution converged.'
+    nfev: 9
+     qtf: array([-2.66786593e-13])
+       r: array([-1.67361202])
+  status: 1
+ success: True
+       x: array([-0.73908513])</pre> <b>最小化函数</b> 
+    <p>函数表示一条曲线，曲线有高点和低点。</p> 
+    <p>高点称为最大值。</p> 
+    <p>低点称为最小值。</p> 
+    <p>整条曲线中的最高点称为全局最大值，其余部分称为局部最大值。</p> 
+    <p> 整条曲线的最低点称为全局最小值，其余的称为局部最小值。</p> 
+    <p> 可以使用 <span class="marked">scipy.optimize.minimize()</span> 函数来最小化函数。</p> 
+    <p> minimize() 函接受以下几个参数：</p> 
+    <ul> 
+     <li> <p>fun - 要优化的函数</p> </li> 
+     <li> <p>x0 - 初始猜测值</p> </li> 
+     <li> <p>method - 要使用的方法名称，值可以是：'CG'，'BFGS'，'Newton-CG'，'L-BFGS-B'，'TNC'，'COBYLA'，，'SLSQP'。</p></li> 
+     <li> <p>callback - 每次优化迭代后调用的函数。</p></li> 
+     <li> <p>options - 定义其他参数的字典：</p> <pre>{
+     "disp": boolean - print detailed description
+     "gtol": number - the tolerance of the error
+}</pre> </li> 
+    </ul> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>x^2 + x + 2 使用 BFGS 的最小化函数:</p> 
+     <pre class="example_code">
+
+<span>from</span> scipy.<span>optimize</span> <span>import</span> minimize<br>
+<br>
+<span>def</span> eqn<span>(</span>x<span>)</span>:<br>
+&nbsp; <span>return</span> x**<span>2</span> + x + <span>2</span><br>
+<br>
+mymin <span>=</span> minimize<span>(</span>eqn<span>,</span> <span>0</span><span>,</span> method<span>=</span><span>'BFGS'</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mymin<span>)</span><br>
+</pre> 
+    </div> 
+    <p>执行以上代码，输出结果如下：</p> 
+    <pre>
+      fun: 1.75
+ hess_inv: array([[0.50000001]])
+      jac: array([0.])
+  message: 'Optimization terminated successfully.'
+     nfev: 8
+      nit: 2
+     njev: 4
+   status: 0
+  success: True
+        x: array([-0.50000001])</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-sparse-matrix.html"> SciPy 稀疏矩阵 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 稀疏矩阵</b> 
+    <p> 稀疏矩阵（英语：sparse matrix）指的是在数值分析中绝大多数数值为零的矩阵。反之，如果大部分元素都非零，则这个矩阵是稠密的(Dense)。</p> 
+    <p>在科学与工程领域中求解线性模型时经常出现大型的稀疏矩阵。</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/v2-d4b2cc03d5461fac7c9912aa4fe321b7_b.gif"></p> 
+    <p>上图中左边就是一个稀疏矩阵，可以看到包含了很多 0 元素，右边是稠密的矩阵，大部分元素不是 0。</p> 
+    <p> 看一个简单例子：</p> 
+    <p><img width="50%" src="https://static.runoob.com/images/mix/1b9870651e865fa547146703a5db81c0546051b0.svg"></p> 
+    <p>上述稀疏矩阵仅包含 9 个非零元素，另外包含 26 个零元。其稀疏度为 74%，密度为 26%。</p> 
+    <p> SciPy 的 <span class="marked">scipy.sparse</span> 模块提供了处理稀疏矩阵的函数。</p> 
+    <p> 我们主要使用以下两种类型的稀疏矩阵：</p> 
+    <ul> 
+     <li> CSC - 压缩稀疏列（Compressed Sparse Column），按列压缩。 </li> 
+     <li> CSR - 压缩稀疏行（Compressed Sparse Row），按行压缩。</li> 
+    </ul> 
+    <p> 本章节我们主要使用 CSR 矩阵。</p> <b>CSR 矩阵</b> 
+    <p> 我们可以通过向 <span class="marked">scipy.sparse.csr_matrix()</span> 函数传递数组来创建一个 CSR 矩阵。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>创建 CSR 矩阵。</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>csr_matrix<span>(</span>arr<span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p> 以上代码输出结果为：</p> 
+    <pre>
+  (0, 5)        1
+  (0, 6)        1
+  (0, 8)        2</pre> 
+    <p><strong>结果解析：</strong></p> 
+    <ul> 
+     <li> 第一行：在矩阵第一行（索引值 0 ）第六（索引值 5 ）个位置有一个数值 1。 </li> 
+     <li> 第二行：在矩阵第一行（索引值 0 ）第七（索引值 6 ）个位置有一个数值 1。 </li> 
+     <li> 第三行：在矩阵第一行（索引值 0 ）第九（索引值 8 ）个位置有一个数值 2。 </li> 
+    </ul> <b>CSR 矩阵方法</b> 
+    <p> 我们可以使用 <span class="marked">data</span> 属性查看存储的数据（不含 0 元素）：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span> <span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span> <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>]</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>csr_matrix<span>(</span>arr<span>)</span>.<span>data</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+[1 1 2]</pre> 
+    <p> 使用 <span class="marked">count_nonzero()</span> 方法计算非 0 元素的总数：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span> <span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span> <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>]</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>csr_matrix<span>(</span>arr<span>)</span>.<span>count_nonzero</span><span>(</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+3</pre> 
+    <p> 使用 <span class="marked">remove_zeros()</span> 方法删除矩阵中 0 元素：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span> <span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span> <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>]</span><span>)</span><br>
+<br>
+mat <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+mat.<span>eliminate_zeros</span><span>(</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mat<span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+  (1, 2)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (2, 0)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (2, 2)&nbsp;&nbsp;&nbsp;&nbsp;2</pre> 
+    <p>使用 sum_duplicates() 方法来删除重复项:</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span> <span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span> <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>]</span><span>)</span><br>
+<br>
+mat <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+mat.<span>sum_duplicates</span><span>(</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mat<span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+  (1, 2)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (2, 0)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (2, 2)&nbsp;&nbsp;&nbsp;&nbsp;2</pre> 
+    <p>csr 转换为 csc 使用 tocsc() 方法：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span> <span>[</span><span>0</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span> <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>2</span><span>]</span><span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span>.<span>tocsc</span><span>(</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>newarr<span>)</span><br>
+</pre> 
+    </div> 
+    <pre>
+  (2, 0)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (1, 2)&nbsp;&nbsp;&nbsp;&nbsp;1
+  (2, 2)&nbsp;&nbsp;&nbsp;&nbsp;2</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-graph.html"> SciPy 图结构 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 图结构</b> 
+    <p>图结构是算法学中最强大的框架之一。</p> 
+    <p>图是各种关系的节点和边的集合，节点是与对象对应的顶点，边是对象之间的连接。</p> 
+    <p>SciPy 提供了 scipy.sparse.csgraph 模块来处理图结构。</p> <b>邻接矩阵</b> 
+    <p>邻接矩阵（Adjacency Matrix）是表示顶点之间相邻关系的矩阵。</p> 
+    <p> 邻接矩阵逻辑结构分为两部分：V 和 E 集合，其中，V 是顶点，E 是边，边有时会有权重，表示节点之间的连接强度。</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/undirected-graph.png"></p> 
+    <p> 用一个一维数组存放图中所有顶点数据，用一个二维数组存放顶点间关系（边或弧）的数据，这个二维数组称为邻接矩阵。</p> 
+    <p>看下下图实例：</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/scipy_graph.png"></p> 
+    <p>顶点有 A、B、C，边权重有 1 和 2。</p> 
+    <p>A 与 B 是连接的，权重为 1。</p> 
+    <p>A 与 C 是连接的，权重为 2。</p> 
+    <p>C 与 B 是没有连接的。</p> 这个邻接矩阵可以表示为以下二维数组： 
+    <pre>
+     A B C
+   A:[0 1 2]  
+   B:[1 0 0]
+   C:[2 0 0]</pre> 
+    <p>邻接矩阵又分为有向图邻接矩阵和无向图邻接矩阵。</p> 
+    <p>无向图是双向关系，边没有方向：</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/GraphAdjacencyMatrix1.jpeg"></p> 有向图的边带有方向，是单向关系： 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/GraphAdjacencyMatrix2.jpeg"></p> 
+    <p> <strong>注：</strong>上面两个图中的 D 节点是自环，自环是指一条边的两端为同一个节点。</p> <b>连接组件</b> 
+    <p> 查看所有连接组件使用 connected_components() 方法。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> connected_components<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>connected_components<span>(</span>newarr<span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>(1, array([0, 0, 0], dtype=int32))</pre> <b>Dijkstra -- 最短路径算法</b> 
+    <p>Dijkstra(迪杰斯特拉)最短路径算法，用于计算一个节点到其他所有节点的最短路径。</p> 
+    <p>Scipy 使用 dijkstra() 方法来计算一个元素到其他元素的最短路径。</p> dijkstra() 方法可以设置以下几个参数： 
+    <ol> 
+     <li><strong>return_predecessors:</strong> 布尔值，设置 True，遍历所有路径，如果不想遍历所有路径可以设置为 False。</li> 
+     <li><strong>indices:</strong> 元素的索引，返回该元素的所有路径。</li> 
+     <li><strong>limit:</strong> 路径的最大权重。</li> 
+    </ol> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>查找元素 1 到 2 的最短路径：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> dijkstra<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>dijkstra<span>(</span>newarr<span>,</span> return_predecessors<span>=</span><span>True</span><span>,</span> indices<span>=</span><span>0</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>(array([ 0.,  1.,  2.]), array([-9999,     0,     0], dtype=int32))</pre> <b>Floyd Warshall -- 弗洛伊德算法</b> 
+    <p>弗洛伊德算法算法是解决任意两点间的最短路径的一种算法。</p> 
+    <p> Scipy 使用 floyd_warshall() 方法来查找所有元素对之间的最短路径。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>查找所有元素对之间的最短路径径：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> floyd_warshall<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>floyd_warshall<span>(</span>newarr<span>,</span> return_predecessors<span>=</span><span>True</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+(array([[ 0.,  1.,  2.],
+       [ 1.,  0.,  3.],
+       [ 2.,  3.,  0.]]), array([[-9999,     0,     0],
+       [    1, -9999,     0],
+       [    2,     0, -9999]], dtype=int32))
+</pre> <b>Bellman Ford -- 贝尔曼-福特算法</b> 
+    <p> 贝尔曼-福特算法是解决任意两点间的最短路径的一种算法。</p> 
+    <p> Scipy 使用 bellman_ford() 方法来查找所有元素对之间的最短路径，通常可以在任何图中使用，包括有向图、带负权边的图。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p> 使用负权边的图查找从元素 1 到元素 2 的最短路径：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> bellman_ford<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> -<span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>0</span><span>,</span> <span>0</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>bellman_ford<span>(</span>newarr<span>,</span> return_predecessors<span>=</span><span>True</span><span>,</span> indices<span>=</span><span>0</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+(array([ 0., -1.,  2.]), array([-9999,     0,     0], dtype=int32))
+</pre> <b>深度优先顺序</b> 
+    <p> depth_first_order() 方法从一个节点返回深度优先遍历的顺序。</p> 
+    <p> 可以接收以下参数：</p> 
+    <ul> 
+     <li> 图</li> 
+     <li> 图开始遍历的元素</li> 
+    </ul> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>给定一个邻接矩阵，返回深度优先遍历的顺序：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> depth_first_order<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>depth_first_order<span>(</span>newarr<span>,</span> <span>1</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+(array([1, 0, 3, 2], dtype=int32), array([    1, -9999,     1,     0], dtype=int32))
+</pre> <b>广度优先顺序</b> 
+    <p> breadth_first_order() 方法从一个节点返回广度优先遍历的顺序。</p> 
+    <p> 可以接收以下参数：</p> 
+    <ul> 
+     <li> 图</li> 
+     <li> 图开始遍历的元素</li> 
+    </ul> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>给定一个邻接矩阵，返回广度优先遍历的顺序：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>sparse</span>.<span>csgraph</span> <span>import</span> breadth_first_order<br>
+<span>from</span> scipy.<span>sparse</span> <span>import</span> csr_matrix<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>1</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>0</span><span>,</span> <span>1</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+newarr <span>=</span> csr_matrix<span>(</span>arr<span>)</span><br>
+<br>
+<span>print</span><span>(</span>breadth_first_order<span>(</span>newarr<span>,</span> <span>1</span><span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>以上代码输出结果为：</p> 
+    <pre>
+(array([1, 0, 2, 3], dtype=int32), array([    1, -9999,     1,     1], dtype=int32))
+</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-spatial-data.html"> SciPy 空间数据 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 空间数据</b> 
+    <p>空间数据又称几何数据，它用来表示物体的位置、形态、大小分布等各方面的信息，比如坐标上的点。</p> 
+    <p> SciPy 通过 scipy.spatial 模块处理空间数据，比如判断一个点是否在边界内、计算给定点周围距离最近点以及给定距离内的所有点。</p> <b>三角测量</b> 
+    <p>三角测量在三角学与几何学上是一借由测量目标点与固定基准线的已知端点的角度，测量目标距离的方法。</p> 
+    <p>多边形的三角测量是将多边形分成多个三角形，我们可以用这些三角形来计算多边形的面积。</p> 
+    <p> 拓扑学的一个已知事实告诉我们：任何曲面都存在三角剖分。 </p> 
+    <p>假设曲面上有一个三角剖分， 我们把所有三角形的顶点总个数记为 p(公共顶点只看成一个)，边数记为 a，三角形的个数记为 n，则 e=p-a+n 是曲面的拓扑不变量。 也就是说不管是什么剖分，e 总是得到相同的数值。 e 被称为称为欧拉示性数。 </p> 
+    <p>对一系列的点进行三角剖分点方法是 Delaunay() 三角剖分。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>通过给定的点来创建三角形：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>spatial</span> <span>import</span> Delaunay<br>
+<span>import</span> matplotlib.<span>pyplot</span> <span>as</span> plt<br>
+<br>
+points <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>4</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>3</span><span>,</span> <span>4</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>3</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>4</span><span>,</span> <span>1</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+simplices <span>=</span> Delaunay<span>(</span>points<span>)</span>.<span>simplices</span> &nbsp; &nbsp;<span># 三角形中顶点的索引</span><br>
+<br>
+plt.<span>triplot</span><span>(</span>points<span>[</span>:<span>,</span> <span>0</span><span>]</span><span>,</span> points<span>[</span>:<span>,</span> <span>1</span><span>]</span><span>,</span> simplices<span>)</span><br>
+plt.<span>scatter</span><span>(</span>points<span>[</span>:<span>,</span> <span>0</span><span>]</span><span>,</span> points<span>[</span>:<span>,</span> <span>1</span><span>]</span><span>,</span> color<span>=</span><span>'r'</span><span>)</span><br>
+<br>
+plt.<span>show</span><span>(</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果如下图所示：</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/scipy_spatial_delaunay.png"></p> 
+    <p><strong>注：</strong>三角形顶点的 id 存储在三角剖分对象的 simplices 属性中。</p> <b>凸包</b> 
+    <p> 凸包（Convex Hull）是一个计算几何（图形学）中的概念。</p> 
+    <p> 在一个实数向量空间 V 中，对于给定集合 X，所有包含 X 的凸集的交集 S 被称为 X 的凸包。X 的凸包可以用 X 内所有点(X1，...Xn)的凸组合来构造。</p> 
+    <p> 我们可以使用 ConvexHull() 方法来创建凸包。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>通过给定的点来创建凸包：</p> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>spatial</span> <span>import</span> ConvexHull<br>
+<span>import</span> matplotlib.<span>pyplot</span> <span>as</span> plt<br>
+<br>
+points <span>=</span> np.<span>array</span><span>(</span><span>[</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>4</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>3</span><span>,</span> <span>4</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>3</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>2</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>4</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>5</span><span>,</span> <span>0</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>3</span><span>,</span> <span>1</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>1</span><span>,</span> <span>2</span><span>]</span><span>,</span><br>
+&nbsp; <span>[</span><span>0</span><span>,</span> <span>2</span><span>]</span><br>
+<span>]</span><span>)</span><br>
+<br>
+hull <span>=</span> ConvexHull<span>(</span>points<span>)</span><br>
+hull_points <span>=</span> hull.<span>simplices</span><br>
+<br>
+plt.<span>scatter</span><span>(</span>points<span>[</span>:<span>,</span><span>0</span><span>]</span><span>,</span> points<span>[</span>:<span>,</span><span>1</span><span>]</span><span>)</span><br>
+<span>for</span> simplex <span>in</span> hull_points:<br>
+&nbsp; plt.<span>plot</span><span>(</span>points<span>[</span>simplex<span>,</span><span>0</span><span>]</span><span>,</span> points<span>[</span>simplex<span>,</span><span>1</span><span>]</span><span>,</span> <span>'k-'</span><span>)</span><br>
+<br>
+plt.<span>show</span><span>(</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果如下图所示：</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/scipy_spatial_convexhull.png"></p> <b>K-D 树</b> 
+    <p>kd-tree（k-dimensional树的简称），是一种对k维空间中的实例点进行存储以便对其进行快速检索的树形数据结构。主要应用于多维空间关键数据的搜索（如：范围搜索和最近邻搜索）。</p> 
+    <p> K-D 树可以使用在多种应用场合，如多维键值搜索（范围搜寻及最邻近搜索）。</p> 
+    <p>最邻近搜索用来找出在树中与输入点最接近的点。</p> 
+    <p><strong>KDTree()</strong> 方法返回一个 KDTree 对象。</p> 
+    <p><strong>query()</strong> 方法返回最邻近距离和最邻近位置。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <p>查找到 (1,1) 的最邻近距离:</p> 
+     <pre class="example_code"><span>from</span> scipy.<span>spatial</span> <span>import</span> KDTree<br>
+<br>
+points <span>=</span> <span>[</span><span>(</span><span>1</span><span>,</span> -<span>1</span><span>)</span><span>,</span> <span>(</span><span>2</span><span>,</span> <span>3</span><span>)</span><span>,</span> <span>(</span>-<span>2</span><span>,</span> <span>3</span><span>)</span><span>,</span> <span>(</span><span>2</span><span>,</span> -<span>3</span><span>)</span><span>]</span><br>
+<br>
+kdtree <span>=</span> KDTree<span>(</span>points<span>)</span><br>
+<br>
+res <span>=</span> kdtree.<span>query</span><span>(</span><span>(</span><span>1</span><span>,</span> <span>1</span><span>)</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果如下图所示：</p> 
+    <pre>(2.0, 0)</pre> <b>距离矩阵</b> 
+    <p>在数学中, 一个距离矩阵是一个各项元素为点之间距离的矩阵（二维数组）。因此给定 N 个欧几里得空间中的点，其距离矩阵就是一个非负实数作为元素的 <span class="marked">N×N</span> 的对称矩阵距离矩阵和邻接矩阵概念相似，其区别在于后者仅包含元素（点）之间是否有连边，并没有包含元素（点）之间的连通的距离的讯息。因此，距离矩阵可以看成是邻接矩阵的加权形式。</p> 
+    <p> 举例来说，我们分析如下二维点 a 至 f。在这里，我们把点所在像素之间的欧几里得度量作为距离度量。</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/Clusters.png"></p> 
+    <p>其距离矩阵为：</p> 
+    <p><img style="width:50%" src="https://www.runoob.com/wp-content/uploads/2021/08/1E783E5C-90CD-4C2D-9CF8-1D6AFD3BC299.jpg"></p> 
+    <p> 距离矩阵的这些数据可以进一步被看成是图形表示的热度图（如下图所示），其中黑色代表距离为零，白色代表最大距离。</p> 
+    <p><img src="https://www.runoob.com/wp-content/uploads/2021/08/Distance_matrix.png"></p> 
+    <p>在生物信息学中，距离矩阵用来表示与坐标系无关的蛋白质结构，还有序列空间中两个序列之间的距离。这些表示被用在结构比对，序列比对，还有在核磁共振，X射线和结晶学中确定蛋白质结构。</p> <b>欧几里得距离</b> 
+    <p>在数学中，欧几里得距离或欧几里得度量是欧几里得空间中两点间"普通"（即直线）距离。使用这个距离，欧氏空间成为度量空间。相关联的范数称为欧几里得范数。较早的文献称之为毕达哥拉斯度量。</p> 
+    <p> 欧几里得度量（euclidean metric）（也称欧氏距离）是一个通常采用的距离定义，指在m维空间中两个点之间的真实距离，或者向量的自然长度（即该点到原点的距离）。在二维和三维空间中的欧氏距离就是两点之间的实际距离。</p> 
+    <p>以下实例查看给定点之间的欧几里德距离：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>spatial</span>.<span>distance</span> <span>import</span> euclidean<br>
+<br>
+p1 <span>=</span> <span>(</span><span>1</span><span>,</span> <span>0</span><span>)</span><br>
+p2 <span>=</span> <span>(</span><span>10</span><span>,</span> <span>2</span><span>)</span><br>
+<br>
+res <span>=</span> euclidean<span>(</span>p1<span>,</span> p2<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果如下图所示：</p> 
+    <pre>9.21954445729</pre> <b> 曼哈顿距离</b> 
+    <p> 出租车几何或曼哈顿距离（Manhattan Distance）是由十九世纪的赫尔曼·闵可夫斯基所创词汇 ，是种使用在几何度量空间的几何学用语，用以标明两个点在标准坐标系上的绝对轴距总和。</p> 
+    <p>曼哈顿距离 只能上、下、左、右四个方向进行移动，并且两点之间的曼哈顿距离是两点之间的最短距离。</p> 
+    <p>曼哈顿与欧几里得距离： 红、蓝与黄线分别表示所有曼哈顿距离都拥有一样长度（12），而绿线表示欧几里得距离有6×√2 ≈ 8.48的长度。</p> 
+    <p><img style="width:50%" src="https://www.runoob.com/wp-content/uploads/2021/08/Manhattan_distance.svg.png"></p> 
+    <p>以下实例通过给点的点计算曼哈顿距离：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>spatial</span>.<span>distance</span> <span>import</span> cityblock<br>
+<br>
+p1 <span>=</span> <span>(</span><span>1</span><span>,</span> <span>0</span><span>)</span><br>
+p2 <span>=</span> <span>(</span><span>10</span><span>,</span> <span>2</span><span>)</span><br>
+<br>
+res <span>=</span> cityblock<span>(</span>p1<span>,</span> p2<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>11</pre> <b>余弦距离</b> 
+    <p>余弦距离，也称为余弦相似度，通过测量两个向量的夹角的余弦值来度量它们之间的相似性。</p> 
+    <p> 0 度角的余弦值是 1，而其他任何角度的余弦值都不大于 1，并且其最小值是 -1。</p> 
+    <p>以下实例计算 A 与 B 两点的余弦距离：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>spatial</span>.<span>distance</span> <span>import</span> cosine<br>
+<br>
+p1 <span>=</span> <span>(</span><span>1</span><span>,</span> <span>0</span><span>)</span><br>
+p2 <span>=</span> <span>(</span><span>10</span><span>,</span> <span>2</span><span>)</span><br>
+<br>
+res <span>=</span> cosine<span>(</span>p1<span>,</span> p2<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>0.019419324309079777</pre> <b>汉明距离</b> 
+    <p>在信息论中，两个等长字符串之间的汉明距离（英语：Hamming distance）是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。</p> 
+    <p> 汉明重量是字符串相对于同样长度的零字符串的汉明距离，也就是说，它是字符串中非零的元素个数：对于二进制字符串来说，就是 1 的个数，所以 11101 的汉明重量是 4。</p> 
+    <ul> 
+     <li><b>10<font color="blue">1</font>1<font color="blue">1</font>01</b>与<b>10<font color="red">0</font>1<font color="red">0</font>01</b>之间的汉明距离是2。</li> 
+     <li><b>2<font color="blue">14</font>3<font color="blue">8</font>96</b>与<b>2<font color="red">23</font>3<font color="red">7</font>96</b>之间的汉明距离是3。</li> 
+     <li>"<b><font color="blue">t</font>o<font color="blue">n</font>e<font color="blue">d</font></b>"与"<b><font color="red">r</font>o<font color="red">s</font>e<font color="red">s</font></b>"之间的汉明距离是3。</li> 
+    </ul> 
+    <p>以下实例计算两个点之间的汉明距离：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>spatial</span>.<span>distance</span> <span>import</span> hamming<br>
+<br>
+p1 <span>=</span> <span>(</span><span>True</span><span>,</span> <span>False</span><span>,</span> <span>True</span><span>)</span><br>
+p2 <span>=</span> <span>(</span><span>False</span><span>,</span> <span>True</span><span>,</span> <span>True</span><span>)</span><br>
+<br>
+res <span>=</span> hamming<span>(</span>p1<span>,</span> p2<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>0.666666666667
+</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-matlab-arrays.html"> SciPy Matlab 数组 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy Matlab 数组</b> 
+    <p>NumPy 提供了 Python 可读格式的数据保存方法。</p> 
+    <p>SciPy 提供了与 Matlab 的交互的方法。</p> 
+    <p>SciPy 的 scipy.io 模块提供了很多函数来处理 Matlab 的数组。</p> <b>以 Matlab 格式导出数据</b> 
+    <p><strong>savemat()</strong> 方法可以导出 Matlab 格式的数据。</p> 该方法参数有： 
+    <ul> 
+     <li><strong>filename</strong> - 保存数据的文件名。</li> 
+     <li><strong>mdict</strong> - 包含数据的字典。</li> 
+     <li><strong>do_compression</strong> - 布尔值，指定结果数据是否压缩。默认为 False。</li> 
+    </ul> 
+    <p>将数组作为变量 "vec" 导出到 mat 文件：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> io<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+arr <span>=</span> np.<span>arange</span><span>(</span><span>10</span><span>)</span><br>
+<br>
+io.<span>savemat</span><span>(</span><span>'arr.mat'</span><span>,</span> <span>{</span><span>"vec"</span>: arr<span>}</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p><strong>注意：</strong>上面的代码会在您的计算机上保存了一个名为 "arr.mat" 的文件。</p> <b>导入 Matlab 格式数据</b> 
+    <p>loadmat() 方法可以导入 Matlab 格式数据。</p> 
+    <p>该方法参数：</p> 
+    <ul> 
+     <li><strong>filename</strong> - 保存数据的文件名。 </li> 
+    </ul> 
+    <p>返回一个结构化数组，其键是变量名，对应的值是变量值。</p> 
+    <p>以下实例从 mat 文件中导入数组：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> io<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span><span>,</span> <span>6</span><span>,</span> <span>7</span><span>,</span> <span>8</span><span>,</span> <span>9</span><span>,</span><span>]</span><span>)</span><br>
+<br>
+<span># 导出</span><br>
+io.<span>savemat</span><span>(</span><span>'arr.mat'</span><span>,</span> <span>{</span><span>"vec"</span>: arr<span>}</span><span>)</span><br>
+<br>
+<span># 导入</span><br>
+mydata <span>=</span> io.<span>loadmat</span><span>(</span><span>'arr.mat'</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mydata<span>)</span><br>
+</pre> 
+    </div> 
+    <p> 返回结果如下：</p> 
+    <pre>{
+   '__header__': b'MATLAB 5.0 MAT-file Platform: nt, Created on: Tue Sep 22 13:12:32 2020',
+   '__version__': '1.0',
+   '__globals__': [],
+   'vec': array([[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+ }</pre> 使用变量名 "vec" 只显示 matlab 数据的数组： 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> io<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span><span>,</span> <span>6</span><span>,</span> <span>7</span><span>,</span> <span>8</span><span>,</span> <span>9</span><span>,</span><span>]</span><span>)</span><br>
+<br>
+<span># 导出</span><br>
+io.<span>savemat</span><span>(</span><span>'arr.mat'</span><span>,</span> <span>{</span><span>"vec"</span>: arr<span>}</span><span>)</span><br>
+<br>
+<span># 导入</span><br>
+mydata <span>=</span> io.<span>loadmat</span><span>(</span><span>'arr.mat'</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mydata<span>[</span><span>'vec'</span><span>]</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p> 返回结果如下：</p> 
+    <pre>
+[[0 1 2 3 4 5 6 7 8 9]]</pre> 
+    <p>从结果可以看出数组最初是一维的，但在提取时它增加了一个维度，变成了二维数组。</p> 
+    <p> 解决这个问题可以传递一个额外的参数 <span class="marked">squeeze_me=True</span>：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy <span>import</span> io<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+arr <span>=</span> np.<span>array</span><span>(</span><span>[</span><span>0</span><span>,</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span><span>,</span> <span>6</span><span>,</span> <span>7</span><span>,</span> <span>8</span><span>,</span> <span>9</span><span>,</span><span>]</span><span>)</span><br>
+<br>
+<span># 导出</span><br>
+io.<span>savemat</span><span>(</span><span>'arr.mat'</span><span>,</span> <span>{</span><span>"vec"</span>: arr<span>}</span><span>)</span><br>
+<br>
+<span># 导入</span><br>
+mydata <span>=</span> io.<span>loadmat</span><span>(</span><span>'arr.mat'</span><span>,</span> squeeze_me<span>=</span><span>True</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>mydata<span>[</span><span>'vec'</span><span>]</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p> 返回结果如下：</p> 
+    <pre>
+[0 1 2 3 4 5 6 7 8 9]</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-interpolation.html"> SciPy 插值 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>SciPy 插值</b> <b>什么是插值？</b> 
+    <p> 在数学的数值分析领域中，插值（英语：interpolation）是一种通过已知的、离散的数据点，在范围内推求新数据点的过程或方法。</p> 
+    <p>简单来说插值是一种在给定的点之间生成点的方法。</p> 
+    <p><strong>例如：</strong>对于两个点 1 和 2，我们可以插值并找到点 1.33 和 1.66。</p> 
+    <p> 插值有很多用途，在机器学习中我们经常处理数据缺失的数据，插值通常可用于替换这些值。</p> 
+    <p> 这种填充值的方法称为插补。</p> 
+    <p> 除了插补，插值经常用于我们需要平滑数据集中离散点的地方。</p> <b>如何在 SciPy 中实现插值？</b> 
+    <p>SciPy 提供了 scipy.interpolate 模块来处理插值。</p> <b>一维插值</b> 一维数据的插值运算可以通过方法 <span class="marked">interp1d()</span> 完成。 
+    <p>该方法接收两个参数 x 点和 y 点。</p> 
+    <p>返回值是可调用函数，该函数可以用新的 x 调用并返回相应的 y，<span class="marked">y = f(x)</span>。</p> 
+    <p>对给定的 xs 和 ys 插值，从 2.1、2.2... 到 2.9：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>interpolate</span> <span>import</span> interp1d<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+xs <span>=</span> np.<span>arange</span><span>(</span><span>10</span><span>)</span><br>
+ys <span>=</span> <span>2</span>*xs + <span>1</span><br>
+<br>
+interp_func <span>=</span> interp1d<span>(</span>xs<span>,</span> ys<span>)</span><br>
+<br>
+newarr <span>=</span> interp_func<span>(</span>np.<span>arange</span><span>(</span><span>2.1</span><span>,</span> <span>3</span><span>,</span> <span>0.1</span><span>)</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>newarr<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>[5.2  5.4  5.6  5.8  6.   6.2  6.4  6.6  6.8]</pre> 
+    <p><strong>注意：</strong>新的 xs 应该与旧的 xs 处于相同的范围内，这意味着我们不能使用大于 10 或小于 0 的值调用 interp_func()。</p> <b>单变量插值</b> 
+    <p> 在一维插值中，点是针对单个曲线拟合的，而在样条插值中，点是针对使用多项式分段定义的函数拟合的。</p> 
+    <p>单变量插值使用 UnivariateSpline() 函数，该函数接受 xs 和 ys 并生成一个可调用函数，该函数可以用新的 xs 调用。</p> 
+    <p>分段函数，就是对于自变量 x 的不同的取值范围，有着不同的解析式的函数。</p> 
+    <p>为非线性点找到 2.1、2.2...2.9 的单变量样条插值：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>interpolate</span> <span>import</span> UnivariateSpline<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+xs <span>=</span> np.<span>arange</span><span>(</span><span>10</span><span>)</span><br>
+ys <span>=</span> xs**<span>2</span> + np.<span>sin</span><span>(</span>xs<span>)</span> + <span>1</span><br>
+<br>
+interp_func <span>=</span> UnivariateSpline<span>(</span>xs<span>,</span> ys<span>)</span><br>
+<br>
+newarr <span>=</span> interp_func<span>(</span>np.<span>arange</span><span>(</span><span>2.1</span><span>,</span> <span>3</span><span>,</span> <span>0.1</span><span>)</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>newarr<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>[5.62826474 6.03987348 6.47131994 6.92265019 7.3939103  7.88514634
+   8.39640439 8.92773053 9.47917082]</pre> <b>径向基函数插值</b> 
+    <p> 径向基函数是对应于固定参考点定义的函数。</p> 
+    <p>曲面插值里我们一般使用径向基函数插值。</p> 
+    <p> Rbf() 函数接受 xs 和 ys 作为参数，并生成一个可调用函数，该函数可以用新的 xs 调用。</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>from</span> scipy.<span>interpolate</span> <span>import</span> Rbf<br>
+<span>import</span> numpy <span>as</span> np<br>
+<br>
+xs <span>=</span> np.<span>arange</span><span>(</span><span>10</span><span>)</span><br>
+ys <span>=</span> xs**<span>2</span> + np.<span>sin</span><span>(</span>xs<span>)</span> + <span>1</span><br>
+<br>
+interp_func <span>=</span> Rbf<span>(</span>xs<span>,</span> ys<span>)</span><br>
+<br>
+newarr <span>=</span> interp_func<span>(</span>np.<span>arange</span><span>(</span><span>2.1</span><span>,</span> <span>3</span><span>,</span> <span>0.1</span><span>)</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>newarr<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>
+  [6.25748981  6.62190817  7.00310702  7.40121814  7.8161443   8.24773402
+   8.69590519  9.16070828  9.64233874]</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div>  
+  <h3 href="https://www.runoob.com/scipy/scipy-significance-tests.html"> Scipy 显著性检验 </h3> 
+  <div class="article-body"> 
+   <div class="article-intro" id="content"> <b>Scipy 显著性检验</b> 
+    <p>显著性检验（significance test）就是事先对总体（随机变量）的参数或总体分布形式做出一个假设，然后利用样本信息来判断这个假设（备择假设）是否合理，即判断总体的真实情况与原假设是否有显著性差异。或者说，显著性检验要判断样本与我们对总体所做的假设之间的差异是纯属机会变异，还是由我们所做的假设与总体真实情况之间不一致所引起的。 显著性检验是针对我们对总体所做的假设做检验，其原理就是"小概率事件实际不可能性原理"来接受或否定假设。</p> 
+    <p>显著性检验即用于实验处理组与对照组或两种不同处理的效应之间是否有差异，以及这种差异是否显著的方法。</p> 
+    <p>SciPy 提供了 scipy.stats 的模块来执行Scipy 显著性检验的功能。</p> <b>统计假设</b> 
+    <p> 统计假设是关于一个或多个随机变量的未知分布的假设。随机变量的分布形式已知，而仅涉及分布中的一个或几个未知参数的统计假设，称为参数假设。检验统计假设的过程称为假设检验，判别参数假设的检验称为参数检验。</p> <b>零假设</b> 
+    <p>零假设（null hypothesis），统计学术语，又称原假设，指进行统计检验时预先建立的假设。 零假设成立时，有关统计量应服从已知的某种概率分布。</p> 
+    <p> 当统计量的计算值落入否定域时，可知发生了小概率事件，应否定原假设。</p> 
+    <p>常把一个要检验的假设记作 H0，称为原假设（或零假设） (null hypothesis) ，与 H0 对立的假设记作 H1，称为备择假设(alternative hypothesis) 。</p> 
+    <ul> 
+     <li>在原假设为真时，决定放弃原假设，称为第一类错误，其出现的概率通常记作 <span class="marked">α</span>；</li> 
+     <li>在原假设不真时，决定不放弃原假设，称为第二类错误，其出现的概率通常记作 <span class="marked">β</span></li> 
+     <li>α+β 不一定等于 1。</li> 
+    </ul> 
+    <p> 通常只限定犯第一类错误的最大概率 <span class="marked">α</span>， 不考虑犯第二类错误的概率 <span class="marked">β</span>。这样的假设 检验又称为显著性检验，概率 <span class="marked">α</span> 称为显著性水平。</p> 
+    <p> 最常用的 <span class="marked">α</span> 值为 0.01、0.05、0.10 等。一般情况下，根据研究的问题，如果放弃真假设损失大，为减少这类错误，<span class="marked">α</span> 取值小些 ，反之，<span class="marked">α</span> 取值大些。</p> <b>备择假设</b> 
+    <p>备择假设(alternative hypothesis)是统计学的基本概念之一，其包含关于总体分布的一切使原假设不成立的命题。备择假设亦称对立假设、备选假设。</p> 
+    <p>备择假设可以替代零假设。</p> 
+    <p>例如我们对于学生的评估，我们将采取：</p> 
+    <pre>“学生比平均水平差” -—  作为零假设
+
+“学生优于平均水平” —— 作为替代假设。</pre> <b> 单边检验</b> 
+    <p> 单边检验(one-sided test)亦称单尾检验，又称单侧检验，在假设检验中，用检验统计量的密度曲线和二轴所围成面积中的单侧尾部面积来构造临界区域进行检验的方法称为单边检验。</p> 
+    <p>当我们的假设仅测试值的一侧时，它被称为"单尾测试"。</p> 
+    <p>例子：</p> 
+    <p>对于零假设：</p> 
+    <pre>“均值等于 k”</pre> 
+    <p>我们可以有替代假设：</p> 
+    <pre>“平均值小于 k”
+或
+“平均值大于 k”</pre> <b> 双边检验</b> 
+    <p> 边检验(two-sided test)，亦称双尾检验、双侧检验.在假设检验中，用检验统计量的密度曲线和x轴所围成的面积的左右两边的尾部面积来构造临界区域进行检验的方法。</p> 
+    <p> 当我们的假设测试值的两边时。</p> 
+    <p>例子：</p> 
+    <p>对于零假设：</p> 
+    <pre>“均值等于 k”</pre> 
+    <p>我们可以有替代假设：</p> 
+    <pre>“均值不等于k”</pre> 
+    <p>在这种情况下，均值小于或大于 k，两边都要检查。</p> <b> 阿尔法值</b> 
+    <p> 阿尔法值是显著性水平。</p> 
+    <p> 显著性水平是估计总体参数落在某一区间内，可能犯错误的概率，用 <span class="marked">α</span> 表示。</p> 
+    <p>数据必须有多接近极端才能拒绝零假设。</p> 
+    <p>通常取为 0.01、0.05 或 0.1。</p> <b>P 值</b> P 值表明数据实际接近极端的程度。 
+    <p>比较 P 值和阿尔法值(alpha)来确定统计显著性水平。</p> 
+    <p> 如果 p 值 &lt;= alpha，我们拒绝原假设并说数据具有统计显著性，否则我们接受原假设。</p> <b>T 检验（T-Test）</b> 
+    <p>T 检验用于确定两个变量的均值之间是否存在显著差异，并判断它们是否属于同一分布。</p> 
+    <p> 这是一个双尾测试。</p> 
+    <p> 函数 ttest_ind() 获取两个相同大小的样本，并生成 t 统计和 p 值的元组。</p> 
+    <p>查找给定值 v1 和 v2 是否来自相同的分布：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> ttest_ind<br>
+<br>
+v1 <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+v2 <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+<br>
+res <span>=</span> ttest_ind<span>(</span>v1<span>,</span> v2<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>Ttest_indResult(statistic=0.40833510339674095, pvalue=0.68346891833752133)</pre> 
+    <p>如果只想返回 p 值，请使用 pvalue 属性：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> ttest_ind<br>
+<br>
+v1 <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+v2 <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+<br>
+res <span>=</span> ttest_ind<span>(</span>v1<span>,</span> v2<span>)</span>.<span>pvalue</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>0.68346891833752133</pre> <b>KS 检验</b> KS 检验用于检查给定值是否符合分布。 
+    <p> 该函数接收两个参数；测试的值和 CDF。</p> 
+    <p> CDF 为累积分布函数(Cumulative Distribution Function)，又叫分布函数。</p> 
+    <p>CDF 可以是字符串，也可以是返回概率的可调用函数。</p> 
+    <p> 它可以用作单尾或双尾测试。</p> 
+    <p> 默认情况下它是双尾测试。 我们可以将参数替代作为两侧、小于或大于其中之一的字符串传递。</p> 
+    <p>查找给定值是否符合正态分布：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> kstest<br>
+<br>
+v <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+<br>
+res <span>=</span> kstest<span>(</span>v<span>,</span> <span>'norm'</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>KstestResult(statistic=0.047798701221956841, pvalue=0.97630967161777515)
+</pre> <b> 数据统计说明</b> 
+    <p>使用 describe() 函数可以查看数组的信息，包含以下值：</p> 
+    <ol> 
+     <li>nobs -- 观测次数</li> 
+     <li>minmax -- 最小值和最大值</li> 
+     <li>mean -- 数学平均数</li> 
+     <li>variance -- 方差</li> 
+     <li>skewness -- 偏度</li> 
+     <li>kurtosis -- 峰度</li> 
+    </ol> 
+    <p> 显示数组中的统计描述信息：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> describe<br>
+<br>
+v <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+res <span>=</span> describe<span>(</span>v<span>)</span><br>
+<br>
+<span>print</span><span>(</span>res<span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>DescribeResult(
+    nobs=100,
+    minmax=(-2.0991855456740121, 2.1304142707414964),
+    mean=0.11503747689121079,
+    variance=0.99418092655064605,
+    skewness=0.013953400984243667,
+    kurtosis=-0.671060517912661
+  )
+</pre> <b> 正态性检验（偏度和峰度）</b> 
+    <p>利用观测数据判断总体是否服从正态分布的检验称为正态性检验，它是统计判决中重要的一种特殊的拟合优度假设检验。</p> 
+    <p>正态性检验基于偏度和峰度。</p> 
+    <p>normaltest() 函数返回零假设的 p 值：</p> 
+    <pre>“x 来自正态分布”</pre> <b>偏度</b> 
+    <p>数据对称性的度量。</p> 
+    <p>对于正态分布，它是 0。</p> 
+    <p>如果为负，则表示数据向左倾斜。</p> 
+    <p>如果是正数，则意味着数据是正确倾斜的。</p> <b>峰度</b> 
+    <p> 衡量数据是重尾还是轻尾正态分布的度量。</p> 
+    <p> 正峰度意味着重尾。</p> 
+    <p> 负峰度意味着轻尾。</p> 
+    <p>查找数组中值的偏度和峰度：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> skew<span>,</span> kurtosis<br>
+<br>
+v <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>skew<span>(</span>v<span>)</span><span>)</span><br>
+<span>print</span><span>(</span>kurtosis<span>(</span>v<span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>
+ 0.11168446328610283
+  -0.1879320563260931</pre> 
+    <p> 查找数据是否来自正态分布：</p> 
+    <div class="example"> <b class="example">实例</b> 
+     <pre class="example_code"><span>import</span> numpy <span>as</span> np<br>
+<span>from</span> scipy.<span>stats</span> <span>import</span> normaltest<br>
+<br>
+v <span>=</span> np.<span>random</span>.<span>normal</span><span>(</span>size<span>=</span><span>100</span><span>)</span><br>
+<br>
+<span>print</span><span>(</span>normaltest<span>(</span>v<span>)</span><span>)</span><br>
+</pre> 
+    </div> 
+    <p>输出结果为：</p> 
+    <pre>NormaltestResult(statistic=4.4783745697002848, pvalue=0.10654505998635538)</pre> <!-- 其他扩展 --> 
+   </div> 
+  </div> 
+ </body>
+</html>

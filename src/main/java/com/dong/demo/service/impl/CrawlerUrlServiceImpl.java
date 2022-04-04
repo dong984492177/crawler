@@ -7,8 +7,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dong.demo.mapper.CrawlerUrlMapper;
 import com.dong.demo.model.CrawlerUrl;
 import com.dong.demo.service.CrawlerUrlService;
+import com.dong.demo.util.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,6 +22,10 @@ import java.util.List;
 @Service
 public class CrawlerUrlServiceImpl extends ServiceImpl<CrawlerUrlMapper, CrawlerUrl>
     implements CrawlerUrlService{
+    @Autowired
+    RedisUtils redisUtils;
+
+    private  String setKey = "crawlerUrlFail";
     @Override
     public List<CrawlerUrl>  getByIdAndName(int id , String name ){
         return list(new QueryWrapper<CrawlerUrl>().eq("crawle_id", id).eq("crawle_name", name));
@@ -33,12 +40,29 @@ public class CrawlerUrlServiceImpl extends ServiceImpl<CrawlerUrlMapper, Crawler
     }
 
     /**
+     * 保存
      * @param entity
      * @param updateWrapper
      * @return
      */
     boolean newSaveOrUpdate(CrawlerUrl entity, Wrapper<CrawlerUrl> updateWrapper) {
         return update(entity, updateWrapper) || save(entity);
+    }
+
+    /**
+     * 拿所有未爬虫成功的
+     * @return
+     */
+    List<CrawlerUrl> getAllFail(){
+        return list(new QueryWrapper<CrawlerUrl>().ne("crawle_status", 1).ne("crawle_status", 2));
+    }
+
+    /**
+     * 拿到所有未成功爬虫的塞缓存
+     */
+    void insertFailRedis(){
+        List<CrawlerUrl> allFail = getAllFail();
+        redisUtils.setCacheSet(setKey, Collections.singleton(allFail));
     }
 
 }

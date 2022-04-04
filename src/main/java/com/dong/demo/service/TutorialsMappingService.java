@@ -1,7 +1,9 @@
 package com.dong.demo.service;
 
-import com.dong.demo.model.TutorialsMapping;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dong.demo.model.TutorialsMapping;
+
+import java.util.List;
 
 /**
 * @author DONG
@@ -10,4 +12,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface TutorialsMappingService extends IService<TutorialsMapping> {
     TutorialsMapping getById(int id);
+    /**
+     * 获得 TutorialsMapping
+     * @param type 校验状态
+     * @return
+     */
+    public List<TutorialsMapping> getByType(int type);
 }

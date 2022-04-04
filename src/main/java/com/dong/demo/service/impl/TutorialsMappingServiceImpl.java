@@ -1,14 +1,17 @@
 package com.dong.demo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dong.demo.mapper.TutorialsMappingMapper;
 import com.dong.demo.model.TutorialsMapping;
 import com.dong.demo.service.TutorialsMappingService;
-import com.dong.demo.mapper.TutorialsMappingMapper;
 import com.dong.demo.util.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author DONG
@@ -31,7 +34,7 @@ public class TutorialsMappingServiceImpl extends ServiceImpl<TutorialsMappingMap
     @Override
     public TutorialsMapping getById(int id) {
         TutorialsMapping tutorialsMapping;
-        String key = "tutorialsMapping"+ id;
+        String key = getTutorialsMappingKey(id);
         String tutorialsMappingStringJson = (String) redisUtils.get(key);
         if (tutorialsMappingStringJson == null) {
             tutorialsMapping = tutorialsMappingMapper.selectById(id);
@@ -51,6 +54,28 @@ public class TutorialsMappingServiceImpl extends ServiceImpl<TutorialsMappingMap
         return tutorialsMapping;
     }
 
+    private String getTutorialsMappingKey(int id) {
+        String key = "tutorialsMapping"+ id;
+        return key;
+    }
+
+    /**
+     * 拿到
+     * @return
+     */
+    @Override
+    public List<TutorialsMapping> getByType(int type){
+        List<TutorialsMapping> list = list(new QueryWrapper<TutorialsMapping>().eq("crawlerType",type));
+        for (TutorialsMapping tutorialsMapping : list) {
+            Integer id = tutorialsMapping.getId();
+            String key = getTutorialsMappingKey(id);
+            String tutorialsMappingStringJson = (String) redisUtils.get(key);
+            if (tutorialsMappingStringJson == null) {
+                redisUtils.set(key, JSON.toJSONString(tutorialsMapping));
+            }
+        }
+        return list;
+    }
 
 }
 

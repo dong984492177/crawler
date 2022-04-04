@@ -3,6 +3,8 @@ package com.dong.demo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dong.demo.model.TutorialsNode;
 
+import java.util.List;
+
 /**
 * @author DONG
 * @description 针对表【tutorials_node(爬虫一些教程 需要存放的路径信息)】的数据库操作Service
@@ -17,6 +19,11 @@ public interface TutorialsNodeService extends IService<TutorialsNode> {
      */
     TutorialsNode getByName(int id ,String name);
 
+    /**
+     * 通过crawle_id 和name 报错或者修改数据
+     * @param tutorialsNode
+     * @return
+     */
     boolean saveOrUpdateByName(TutorialsNode tutorialsNode);
     /**
      * 通过 crawle_id 和 name 来查数据库获得指定数据,并刷新 redis
@@ -24,6 +31,18 @@ public interface TutorialsNodeService extends IService<TutorialsNode> {
      * @param name 节点教程名字
      * @return
      */
-    public TutorialsNode getDbByName(int id, String name);
+    TutorialsNode getDbByName(int id, String name);
 
+    /**
+     * 通过CrawleId强行读数据库获得所有的项目
+     * @param id CrawleId
+     * @return
+     */
+    List<TutorialsNode> getDbByCrawleId(int id);
+    /**
+     * 通过CrawleId读缓存获得所有的项目
+     * @param id CrawleId
+     * @return
+     */
+    List<TutorialsNode> getByCrawleId(int id);
 }

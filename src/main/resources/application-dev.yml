@@ -5,14 +5,11 @@ spring:
     url: jdbc:mysql://localhost:3306/dong?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource  # 使用 DruidDataSource作为数据源
-  redis:
-    dataase: 0
-    host: localhost
-    port: 6379
-    password:
+
 my:
  file:
   path: G:/log
-  name: bad
+  name: crawler
 crawler:
-  path: G:\DAIMA\IDEA\demo1\crawler
+  path: G:\DAIMA\IDEA\crawler\crawler
+  md-path: G:\DAIMA\IDEA\crawler\md
