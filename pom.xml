@@ -11,7 +11,7 @@
     <groupId>com.dong</groupId>
     <artifactId>crawler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>crawler</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -74,7 +74,11 @@
             <version>1.18.14</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.0.M2</version>
+        </dependency>
         <!--    jsoup:java爬虫工具   -->
         <dependency>
             <groupId>org.jsoup</groupId>

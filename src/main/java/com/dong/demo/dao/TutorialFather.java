@@ -1,5 +1,6 @@
 package com.dong.demo.dao;
 
+import cn.hutool.core.io.IoUtil;
 import com.dong.demo.model.CrawlerUrl;
 import com.dong.demo.model.TutorialsNode;
 import com.dong.demo.service.CrawlerUrlService;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -51,8 +54,11 @@ public class TutorialFather {
         Document moBanDoc = null;
         Resource resource = new ClassPathResource("model.html");
         try {
-            File file = resource.getFile();
-            moBanDoc = Jsoup.parse(file, "UTF-8");
+            // File file = resource.getFile();
+            InputStream inputStream = resource.getInputStream();
+            String read = IoUtil.read(inputStream, StandardCharsets.UTF_8);
+            // moBanDoc = Jsoup.parse(file, "UTF-8");
+            moBanDoc = Jsoup.parse(read, "UTF-8");
         } catch (IOException e) {
             log.error("读取 model.html 失败",e);
         }
