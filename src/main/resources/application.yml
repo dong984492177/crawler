@@ -1,7 +1,7 @@
 spring:
   profiles:
-#    active: dev
-    active: @profile.active@
+    active: dev
+  #    active: @profile.active@
   output:
     ansi:
       enabled: always

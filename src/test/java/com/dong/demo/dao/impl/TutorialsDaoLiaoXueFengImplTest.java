@@ -18,6 +18,7 @@ class TutorialsDaoLiaoXueFengImplTest {
     TutorialsDao tutorialsDao;
     @Autowired
     CrawlerUrlService crawlerUrlService;
+
     @Test
     void crawlerMainBody() {
         CrawlerUrl crawle_order = crawlerUrlService.getOne(new QueryWrapper<CrawlerUrl>().eq("crawle_order", 1));
@@ -26,7 +27,7 @@ class TutorialsDaoLiaoXueFengImplTest {
 
     @Test
     void crawlerNode() {
-        boolean b = tutorialsDao.crawlerNode(1,"" );
-        log.info(""+b);
+        boolean b = tutorialsDao.crawlerNode(1, "");
+        log.info("" + b);
     }
 }

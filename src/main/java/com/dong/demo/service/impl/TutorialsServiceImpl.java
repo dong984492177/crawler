@@ -30,7 +30,7 @@ import java.util.Map;
 @Slf4j
 public class TutorialsServiceImpl implements TutorialsService {
     @Autowired
-    Map<String , TutorialsDao> map ;
+    Map<String, TutorialsDao> map;
     @Autowired
     TutorialsMappingService tutorialsMappingService;
     @Autowired
@@ -39,6 +39,7 @@ public class TutorialsServiceImpl implements TutorialsService {
     CrawlerUrlService crawlerUrlService;
     @Autowired
     RedisUtils redisUtils;
+
     @Override
     public boolean crawler(int id, String name) {
         TutorialsMapping tutorialsMapping = tutorialsMappingService.getById(id);
@@ -46,53 +47,53 @@ public class TutorialsServiceImpl implements TutorialsService {
             return false;
         }
         String mappingClass = tutorialsMapping.getMappingClass();
-        if (mappingClass==null&&mappingClass.isEmpty()) {
-            log.info("id : {} 没有 mappingClass 数据",id);
+        if (mappingClass == null && mappingClass.isEmpty()) {
+            log.info("id : {} 没有 mappingClass 数据", id);
             return false;
-        }else{
+        } else {
             TutorialsDao tutorialsDao = map.get(mappingClass);
             TutorialsNode tutorialsNode = tutorialsNodeService.getByName(id, name);
             if (tutorialsNode == null) {
-                log.info("项目id为 {} 中没有教程名为 {} 的数据", id,name);
-                return  false;
+                log.info("项目id为 {} 中没有教程名为 {} 的数据", id, name);
+                return false;
             }
 
             int status = tutorialsNode.getTutorialsStatus();
-            List<CrawlerUrl> list = null ;
-            switch (status){
-                case 0 :
+            List<CrawlerUrl> list = null;
+            switch (status) {
+                case 0:
                     list = crawlerBookmarks(id, name, tutorialsDao, tutorialsNode);
                     break;
-                case 1 :
-                case 2 :
-                    list = crawlerUrlService.getByIdAndName(id,name);
-                    if (list.size()==0){
+                case 1:
+                case 2:
+                    list = crawlerUrlService.getByIdAndName(id, name);
+                    if (list.size() == 0) {
                         list = crawlerBookmarks(id, name, tutorialsDao, tutorialsNode);
                     }
                     break;
                 default:
-                    
+
             }
             boolean writeFlag = true;
             for (CrawlerUrl crawlerUrl : list) {
                 Integer crawleStatus = crawlerUrl.getCrawleStatus();
-                if (crawleStatus ==1){
+                if (crawleStatus == 1) {
                     continue;
                 }
                 boolean flag = tutorialsDao.crawlerMainBody(crawlerUrl);
-                if (!flag){
+                if (!flag) {
                     try {
-                        Thread.sleep(10*60*1000);
+                        Thread.sleep(10 * 60 * 1000);
                     } catch (InterruptedException e) {
-                        log.error("暂停时间出错",e);
+                        log.error("暂停时间出错", e);
                     }
                     flag = tutorialsDao.crawlerMainBody(crawlerUrl);
                 }
-                if (!flag){
+                if (!flag) {
                     writeFlag = false;
                 }
             }
-            if (writeFlag){
+            if (writeFlag) {
                 //读 html 模板
                 Document modelDoc = tutorialsDao.readModel();
                 //主要放body
@@ -101,17 +102,17 @@ public class TutorialsServiceImpl implements TutorialsService {
                 Element titleElement = modelDoc.selectFirst("title");
                 titleElement.text(name);
 
-                for (CrawlerUrl crawlerUrl :list){
+                for (CrawlerUrl crawlerUrl : list) {
                     bodyElements.append(crawlerUrl.getCrawlerText().toString());
                 }
                 try {
                     tutorialsDao.writeHTML(name, tutorialsMapping.getName(), modelDoc);
-                    tutorialsDao.writeMd(name ,tutorialsMapping.getName());
+                    tutorialsDao.writeMd(name, tutorialsMapping.getName());
                     tutorialsNode.setTutorialsStatus(2);
                     tutorialsNodeService.saveOrUpdateByName(tutorialsNode);
                     return true;
                 } catch (IOException e) {
-                    log.error("写文件异常",e);
+                    log.error("写文件异常", e);
                 }
             }
 
@@ -122,19 +123,18 @@ public class TutorialsServiceImpl implements TutorialsService {
     }
 
 
-
     private List<CrawlerUrl> crawlerBookmarks(int id, String name, TutorialsDao tutorialsDao, TutorialsNode tutorialsNode) {
         List<CrawlerUrl> list;
         String url = tutorialsNode.getUrl();
         Element div = tutorialsDao.crawler(url);
         list = new ArrayList<CrawlerUrl>();
-        list = tutorialsDao.crawlerBookmarks(id, name,div, list);
+        list = tutorialsDao.crawlerBookmarks(id, name, div, list);
         log.info("批量保存书签");
         for (CrawlerUrl crawlerUrl : list) {
             crawlerUrlService.saveOrUpdateByName(crawlerUrl);
         }
         log.info("修改爬虫节点的状态");
-        if (list.size()> 0){
+        if (list.size() > 0) {
             tutorialsNode.setTutorialsStatus(1);
             tutorialsNodeService.saveOrUpdateByName(tutorialsNode);
         }
@@ -149,6 +149,7 @@ public class TutorialsServiceImpl implements TutorialsService {
 
     /**
      * 通过id 获得对应的DAO接口
+     *
      * @param id
      * @return
      */

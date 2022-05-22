@@ -48,8 +48,9 @@ public class ElementTypeHandler extends BaseTypeHandler<Element> {
 
     /**
      * 将拿到的String转为 Element
+     *
      * @param elementStr 数据库查到的 element的字符串形式
-     * @return  通过 Jsoup 解析后的 Element
+     * @return 通过 Jsoup 解析后的 Element
      */
     private Element getElement(String elementStr) {
         if (elementStr == null) {

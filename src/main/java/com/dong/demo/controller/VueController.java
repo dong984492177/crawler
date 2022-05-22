@@ -44,58 +44,56 @@ public class VueController {
 
 
     @RequestMapping("crawlerNodeStart1/{id}")//爬项目网站节点
-    public boolean crawlerNodeStart1(@PathVariable(name = "id")int id){
+    public boolean crawlerNodeStart1(@PathVariable(name = "id") int id) {
         return tutorialsService.crawlerNode(id, "");
     }
 
     @RequestMapping("getDbNodeByCrawleId/{id}")//强行获得爬虫任务数据
-    public List<TutorialsNode> getDbNodeByCrawleId(@PathVariable(name = "id") int id)
-    {
+    public List<TutorialsNode> getDbNodeByCrawleId(@PathVariable(name = "id") int id) {
         return tutorialsNodeService.getDbByCrawleId(id);
     }
+
     @RequestMapping("getNodeByCrawleId/{id}")//从缓存中获得爬虫数据
-    public List<TutorialsNode> getNodeByCrawleId(@PathVariable(name = "id") int id)
-    {
+    public List<TutorialsNode> getNodeByCrawleId(@PathVariable(name = "id") int id) {
         return tutorialsNodeService.getByCrawleId(id);
     }
+
     @RequestMapping("getNodeDbByName")//从缓存中获得单条爬虫数据
-    public TutorialsNode getNodeDbByName( @RequestBody Map map )
-    {
+    public TutorialsNode getNodeDbByName(@RequestBody Map map) {
         int id = (int) map.get("id");
         String name = (String) map.get("name");
-        return tutorialsNodeService.getDbByName(id,name);
+        return tutorialsNodeService.getDbByName(id, name);
     }
 
     @RequestMapping("getNodeByName")//从缓存中获得单条爬虫数据
-    public TutorialsNode getNodeByName(  @RequestBody Map map )
-    {
+    public TutorialsNode getNodeByName(@RequestBody Map map) {
         int id = (int) map.get("id");
         String name = (String) map.get("name");
-        return tutorialsNodeService.getByName(id,name);
+        return tutorialsNodeService.getByName(id, name);
     }
 
 
     @RequestMapping("crawlerStart")//开始爬虫
-    public boolean crawlerStart( @RequestBody Map map){
+    public boolean crawlerStart(@RequestBody Map map) {
         int id = (int) map.get("id");
         String name = (String) map.get("name");
         return tutorialsService.crawler(id, name);
     }
 
     @RequestMapping("crawlerDownload")//下载文件
-    public String crawlerDownload(HttpServletResponse response, @RequestBody Map map){
+    public String crawlerDownload(HttpServletResponse response, @RequestBody Map map) {
         int id = (int) map.get("id");
         TutorialsMapping tutorialsMapping = tutorialsMappingService.getById(id);
         String mappingName = tutorialsMapping.getName();
         String name = (String) map.get("name");
         int type = (int) map.get("type");
-        String FilePath ="";
-        switch (type){
-            case 1 :{
-                FilePath = crawlerPath + File.separator + mappingName + File.separator + name +".html";
+        String FilePath = "";
+        switch (type) {
+            case 1: {
+                FilePath = crawlerPath + File.separator + mappingName + File.separator + name + ".html";
                 break;
             }
-            case 2 :{
+            case 2: {
                 FilePath = crawlerMdPath + File.separator + mappingName + File.separator + name + ".md";
                 break;
             }
@@ -106,7 +104,7 @@ public class VueController {
         }
         File file = new File(FilePath);
         if (!file.exists()) {
-            return String.format("下载文件%s不存在",mappingName+" _ "+name );
+            return String.format("下载文件%s不存在", mappingName + " _ " + name);
         }
         response.reset();
         response.setContentType("application/octet-stream");
@@ -114,22 +112,22 @@ public class VueController {
         response.setContentLength((int) file.length());
         log.info(file.getName());
         try {
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(),"UTF-8")  );
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
-            log.error("{}",e);
+            log.error("{}", e);
             return "下载失败";
         }
 
-        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
             byte[] buff = new byte[1024];
-            OutputStream os  = response.getOutputStream();
+            OutputStream os = response.getOutputStream();
             int i = 0;
             while ((i = bis.read(buff)) != -1) {
                 os.write(buff, 0, i);
                 os.flush();
             }
         } catch (IOException e) {
-            log.error("{}",e);
+            log.error("{}", e);
             return "下载失败";
         }
         return "下载成功";

@@ -18,10 +18,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class RedisAop {
     @Pointcut("execution (* com.dong.demo.util.RedisUtils.*(..))")
-    void all(){
+    void all() {
     }
+
     @Before("all()")
-    void allBefore(JoinPoint joinPoint){
+    void allBefore(JoinPoint joinPoint) {
         AopUtil.BeforeLog(joinPoint);
     }
 }

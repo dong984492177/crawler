@@ -20,8 +20,9 @@ import java.nio.file.Paths;
 public class Test001 {
     @Value("${crawler.path}")
     String crawlerPath;
+
     @Test
-    void test(){
+    void test() {
         String mappingName = "廖雪峰官网";
         String name = "java教程";
         Path path = Paths.get(crawlerPath + File.separator + mappingName);

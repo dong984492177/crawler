@@ -9,20 +9,21 @@ package com.dong.demo.service;
 public interface TutorialsService {
     /**
      * 开始爬虫
+     *
      * @param id
      * @param name
      * @return
      */
-    public boolean crawler(int id ,String name);
+    public boolean crawler(int id, String name);
 
     /**
      * 去爬网站的节点,一个网站有很多教程
-     * @param id 项目对应的id
+     *
+     * @param id        项目对应的id
      * @param appendStr 追加条件,部分会用到
      * @return
      */
     public boolean crawlerNode(int id, String appendStr);
-
 
 
 }

@@ -10,9 +10,10 @@ import java.io.Serializable;
 
 /**
  * 教程爬虫 映射类
+ *
  * @TableName tutorials_mapping
  */
-@TableName(value ="tutorials_mapping")
+@TableName(value = "tutorials_mapping")
 @Data
 public class TutorialsMapping implements Serializable {
     /**
@@ -57,10 +58,10 @@ public class TutorialsMapping implements Serializable {
         }
         TutorialsMapping other = (TutorialsMapping) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getMappingClass() == null ? other.getMappingClass() == null : this.getMappingClass().equals(other.getMappingClass()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getCrawlertype() == null ? other.getCrawlertype() == null : this.getCrawlertype().equals(other.getCrawlertype()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getMappingClass() == null ? other.getMappingClass() == null : this.getMappingClass().equals(other.getMappingClass()))
+                && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+                && (this.getCrawlertype() == null ? other.getCrawlertype() == null : this.getCrawlertype().equals(other.getCrawlertype()));
     }
 
     @Override

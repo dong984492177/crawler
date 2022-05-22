@@ -11,9 +11,10 @@ import java.io.Serializable;
 
 /**
  * 爬虫url
+ *
  * @TableName crawler_url
  */
-@TableName(value ="crawler_url" ,autoResultMap = true)
+@TableName(value = "crawler_url", autoResultMap = true)
 @Accessors(chain = true)
 @Data
 public class CrawlerUrl implements Serializable {
@@ -96,15 +97,15 @@ public class CrawlerUrl implements Serializable {
         }
         CrawlerUrl other = (CrawlerUrl) that;
         return (this.getCrawleId() == null ? other.getCrawleId() == null : this.getCrawleId().equals(other.getCrawleId()))
-            && (this.getCrawleName() == null ? other.getCrawleName() == null : this.getCrawleName().equals(other.getCrawleName()))
-            && (this.getUrlText() == null ? other.getUrlText() == null : this.getUrlText().equals(other.getUrlText()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getUrlElement() == null ? other.getUrlElement() == null : this.getUrlElement().equals(other.getUrlElement()))
-            && (this.getUrlGrade() == null ? other.getUrlGrade() == null : this.getUrlGrade().equals(other.getUrlGrade()))
-            && (this.getCrawleStatus() == null ? other.getCrawleStatus() == null : this.getCrawleStatus().equals(other.getCrawleStatus()))
-            && (this.getCrawleOrder() == null ? other.getCrawleOrder() == null : this.getCrawleOrder().equals(other.getCrawleOrder()))
-            && (this.getErrDescribe() == null ? other.getErrDescribe() == null : this.getErrDescribe().equals(other.getErrDescribe()))
-            && (this.getCrawlerText() == null ? other.getCrawlerText() == null : this.getCrawlerText().equals(other.getCrawlerText()));
+                && (this.getCrawleName() == null ? other.getCrawleName() == null : this.getCrawleName().equals(other.getCrawleName()))
+                && (this.getUrlText() == null ? other.getUrlText() == null : this.getUrlText().equals(other.getUrlText()))
+                && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+                && (this.getUrlElement() == null ? other.getUrlElement() == null : this.getUrlElement().equals(other.getUrlElement()))
+                && (this.getUrlGrade() == null ? other.getUrlGrade() == null : this.getUrlGrade().equals(other.getUrlGrade()))
+                && (this.getCrawleStatus() == null ? other.getCrawleStatus() == null : this.getCrawleStatus().equals(other.getCrawleStatus()))
+                && (this.getCrawleOrder() == null ? other.getCrawleOrder() == null : this.getCrawleOrder().equals(other.getCrawleOrder()))
+                && (this.getErrDescribe() == null ? other.getErrDescribe() == null : this.getErrDescribe().equals(other.getErrDescribe()))
+                && (this.getCrawlerText() == null ? other.getCrawlerText() == null : this.getCrawlerText().equals(other.getCrawlerText()));
     }
 
     @Override

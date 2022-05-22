@@ -21,10 +21,11 @@ class TutorialsDaoTest {
     TutorialsDao tutorialsDao;
     @Autowired
     CrawlerUrlService crawlerUrlService;
+
     @Test
     void crawlerNode() {
-        boolean b = tutorialsDao.crawlerNode(2,"" );
-        log.info(""+b);
+        boolean b = tutorialsDao.crawlerNode(2, "");
+        log.info("" + b);
     }
 
     @Test
@@ -41,7 +42,7 @@ class TutorialsDaoTest {
     void crawlerBookmarks() {
         Element crawler = tutorialsDao.crawler("https://www.runoob.com/html/html-tutorial.html");
         ArrayList<CrawlerUrl> list = new ArrayList<>();
-        tutorialsDao.crawlerBookmarks(2,"学习 HTML",crawler, list);
+        tutorialsDao.crawlerBookmarks(2, "学习 HTML", crawler, list);
     }
 
     @Test

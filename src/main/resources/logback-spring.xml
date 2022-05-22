@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <!--直接定义属性-->
     <!--logFile以/开头相对计算机目录，不以/开头该程序的根目录-->
-    <springProperty  scope="context" name="logPath" source="my.file.path" defaultValue="logdir"/>
-    <springProperty  scope="context" name="logName" source="my.file.name" defaultValue="bak"/>
-<!--    <property name="logName" value="search"/>-->
+    <springProperty scope="context" name="logPath" source="my.file.path" defaultValue="logdir"/>
+    <springProperty scope="context" name="logName" source="my.file.name" defaultValue="bak"/>
+    <!--    <property name="logName" value="search"/>-->
     <property name="maxFileSize" value="100MB"/>
 
     <!-- 格式化输出: %d: 日期; %-5level: 级别从左显示5个字符宽度; %thread: 线程名; %logger: 类名; %M: 方法名; %line: 行号; %msg: 日志消息; %n: 换行符 -->
     <!-- 具体配置可参考   ch/qos/logback/classic/PatternLayout.java-->
-<!--    颜色
-    black               黑色的
-    red                 红色的
-    green               绿色
-    yellow              黄色的
-    blue                蓝色
-    magenta             品红
-    cyan                青色
-    white               白色的
-    gray                灰色的
-    boldRed             粗体红色
-    boldGreen           粗体绿色
-    boldYellow          粗体黄色
-    boldBlue            加粗蓝色
-    boldMagenta         大胆的洋红色
-    boldCyan            大胆的青色
-    boldWhite           大胆的白色
-    highlight           强调-->
+    <!--    颜色
+        black               黑色的
+        red                 红色的
+        green               绿色
+        yellow              黄色的
+        blue                蓝色
+        magenta             品红
+        cyan                青色
+        white               白色的
+        gray                灰色的
+        boldRed             粗体红色
+        boldGreen           粗体绿色
+        boldYellow          粗体黄色
+        boldBlue            加粗蓝色
+        boldMagenta         大胆的洋红色
+        boldCyan            大胆的青色
+        boldWhite           大胆的白色
+        highlight           强调-->
 
-    <property name="allPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) [%-5thread] %highlight(%-5level) [%green(%-50.50class) %boldYellow(%M:%line)]  >>> %cyan(%msg) %n"/>
+    <property name="allPattern"
+              value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) [%-5thread] %highlight(%-5level) [%green(%-50.50class) %boldYellow(%M:%line)]  >>> %cyan(%msg) %n"/>
 
 
     <!--开控制台日志模板-->
@@ -101,12 +102,12 @@
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="fileLog"/>
-        <appender-ref ref="file_error" />
+        <appender-ref ref="file_error"/>
     </root>
 
     <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <logger name="com.dong.demo.dao" level="DEBUG">
-        <appender-ref ref="fileLog" />
+        <appender-ref ref="fileLog"/>
     </logger>
 </configuration>

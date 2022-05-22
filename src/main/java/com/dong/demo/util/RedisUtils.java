@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis连接的工具类
  * 复制 于 https://www.cnblogs.com/chenyanbin/p/13515268.html#%E5%AE%8C%E6%95%B4pom.xml
+ *
  * @author Dong_Jia_Qi on 2021/12/2
  */
 @Service
@@ -29,7 +30,7 @@ public class RedisUtils {
      * 写入缓存
      *
      * @param key
-     * @param offset   位 8Bit=1Byte
+     * @param offset 位 8Bit=1Byte
      * @return
      */
     public boolean setBit(String key, long offset, boolean isShow) {
@@ -159,6 +160,7 @@ public class RedisUtils {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.put(key, hashKey, value);
     }
+
     /**
      * @description: 通过redisKey 批量(map)设置redisValue(hash)
      * @param: [redisKey, redisValue]
@@ -166,7 +168,7 @@ public class RedisUtils {
      * @author: Xue 8
      * @date: 2019/2/14
      */
-    public void setHashAll(String redisKey, Map<String,Object> redisValue){
+    public void setHashAll(String redisKey, Map<String, Object> redisValue) {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.putAll(redisKey, redisValue);
     }
@@ -186,35 +188,38 @@ public class RedisUtils {
 
     /**
      * 哈希获得键的全部值
+     *
      * @param key
      * @return
      */
-    public Set<Object> hmGetAll(String key){
+    public Set<Object> hmGetAll(String key) {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         return hash.keys(key);
     }
 
     /**
      * 哈希删除键的某个值
+     *
      * @param key
      * @param hashKey
      * @return
      */
-    public Long hmRemoveByKey(String key, Object hashKey){
+    public Long hmRemoveByKey(String key, Object hashKey) {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         return hash.delete(key, hashKey);
     }
 
     /**
      * 哈希删除键的所有值
+     *
      * @param key
      * @return
      */
-    public boolean hmRemoveAll(String key){
+    public boolean hmRemoveAll(String key) {
         try {
             Set<Object> objects = hmGetAll(key);
             for (Object object : objects) {
-                hmRemoveByKey(key,object);
+                hmRemoveByKey(key, object);
             }
         } catch (Exception e) {
             return false;
@@ -268,6 +273,7 @@ public class RedisUtils {
         SetOperations<String, Object> set = redisTemplate.opsForSet();
         return set.members(key);
     }
+
     /**
      * 缓存Set
      *
@@ -328,12 +334,12 @@ public class RedisUtils {
     /**
      * 有序集合获取排名
      *
-     * @param key 集合名称
+     * @param key   集合名称
      * @param value 值
      */
     public Long zRank(String key, Object value) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        return zset.rank(key,value);
+        return zset.rank(key, value);
     }
 
 
@@ -342,9 +348,9 @@ public class RedisUtils {
      *
      * @param key
      */
-    public Set<ZSetOperations.TypedTuple<Object>> zRankWithScore(String key, long start,long end) {
+    public Set<ZSetOperations.TypedTuple<Object>> zRankWithScore(String key, long start, long end) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<Object>> ret = zset.rangeWithScores(key,start,end);
+        Set<ZSetOperations.TypedTuple<Object>> ret = zset.rangeWithScores(key, start, end);
         return ret;
     }
 
@@ -356,7 +362,7 @@ public class RedisUtils {
      */
     public Double zSetScore(String key, Object value) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        return zset.score(key,value);
+        return zset.score(key, value);
     }
 
 
@@ -378,9 +384,9 @@ public class RedisUtils {
      *
      * @param key
      */
-    public Set<ZSetOperations.TypedTuple<Object>> reverseZRankWithScore(String key, long start,long end) {
+    public Set<ZSetOperations.TypedTuple<Object>> reverseZRankWithScore(String key, long start, long end) {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<Object>> ret = zset.reverseRangeByScoreWithScores(key,start,end);
+        Set<ZSetOperations.TypedTuple<Object>> ret = zset.reverseRangeByScoreWithScores(key, start, end);
         return ret;
     }
 

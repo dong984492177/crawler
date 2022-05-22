@@ -9,10 +9,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 
  * @TableName roles
  */
-@TableName(value ="roles")
+@TableName(value = "roles")
 @Data
 public class Roles implements Serializable {
     /**
@@ -72,13 +71,13 @@ public class Roles implements Serializable {
         }
         Roles other = (Roles) that;
         return (this.getRId() == null ? other.getRId() == null : this.getRId().equals(other.getRId()))
-            && (this.getRUser() == null ? other.getRUser() == null : this.getRUser().equals(other.getRUser()))
-            && (this.getRPassword() == null ? other.getRPassword() == null : this.getRPassword().equals(other.getRPassword()))
-            && (this.getRGrade() == null ? other.getRGrade() == null : this.getRGrade().equals(other.getRGrade()))
-            && (this.getRUsername() == null ? other.getRUsername() == null : this.getRUsername().equals(other.getRUsername()))
-            && (this.getRGold() == null ? other.getRGold() == null : this.getRGold().equals(other.getRGold()))
-            && (this.getRUaId() == null ? other.getRUaId() == null : this.getRUaId().equals(other.getRUaId()))
-            && (this.getRImg() == null ? other.getRImg() == null : this.getRImg().equals(other.getRImg()));
+                && (this.getRUser() == null ? other.getRUser() == null : this.getRUser().equals(other.getRUser()))
+                && (this.getRPassword() == null ? other.getRPassword() == null : this.getRPassword().equals(other.getRPassword()))
+                && (this.getRGrade() == null ? other.getRGrade() == null : this.getRGrade().equals(other.getRGrade()))
+                && (this.getRUsername() == null ? other.getRUsername() == null : this.getRUsername().equals(other.getRUsername()))
+                && (this.getRGold() == null ? other.getRGold() == null : this.getRGold().equals(other.getRGold()))
+                && (this.getRUaId() == null ? other.getRUaId() == null : this.getRUaId().equals(other.getRUaId()))
+                && (this.getRImg() == null ? other.getRImg() == null : this.getRImg().equals(other.getRImg()));
     }
 
     @Override

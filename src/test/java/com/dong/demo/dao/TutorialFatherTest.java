@@ -19,17 +19,19 @@ import java.util.List;
 @SpringBootTest
 class TutorialFatherTest {
     @Autowired
-    TutorialFather tutorialFather ;
+    TutorialFather tutorialFather;
     @Autowired
-    CrawlerUrlService crawlerUrlService ;
+    CrawlerUrlService crawlerUrlService;
+
     @Test
     void readModel() {
         Document document = tutorialFather.readModel();
         log.info(document.toString());
     }
+
     @Test
-    public void  test(){
-        String a ="<a href=\"https://www.liaoxuefeng.com/wiki/1252599548343744\" class=\"x-wiki-index-item\">Java教程</a>";
+    public void test() {
+        String a = "<a href=\"https://www.liaoxuefeng.com/wiki/1252599548343744\" class=\"x-wiki-index-item\">Java教程</a>";
 //        String a =null;
         Document parse = Jsoup.parse(a);
         Element body = parse.body();
@@ -39,7 +41,7 @@ class TutorialFatherTest {
 
     @Test
     void writeMd() {
-        String name =  "java教程" ;
+        String name = "java教程";
         List<CrawlerUrl> list = crawlerUrlService.getByIdAndName(1, name);
         //读 html 模板
         Document modelDoc = tutorialFather.readModel();
@@ -49,13 +51,13 @@ class TutorialFatherTest {
         Element titleElement = modelDoc.selectFirst("title");
         titleElement.text(name);
 
-        for (CrawlerUrl crawlerUrl :list){
+        for (CrawlerUrl crawlerUrl : list) {
             bodyElements.append(crawlerUrl.getCrawlerText().toString());
         }
         try {
-            tutorialFather.writeMd(name,"廖雪峰官网");
+            tutorialFather.writeMd(name, "廖雪峰官网");
         } catch (IOException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -74,11 +76,11 @@ class TutorialFatherTest {
 
     @Test
     void testWriteMd() {
-        String name =  "学习 Go" ;
+        String name = "学习 Go";
         try {
-            tutorialFather.writeMd(name,"菜鸟教程");
+            tutorialFather.writeMd(name, "菜鸟教程");
         } catch (IOException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
     }
 }

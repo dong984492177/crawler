@@ -21,23 +21,29 @@ import org.springframework.stereotype.Component;
 public class TutorialsAop {
     @Autowired
     CrawlerUrlService crawlerUrlService;
+
     @Pointcut("execution (* com.dong.demo.dao.TutorialsDao.crawler(..))")
-    void crawler(){
+    void crawler() {
     }
+
     @Pointcut("execution (* com.dong.demo.dao.TutorialsDao.crawlerBookmarks(..))")
-    void crawlerBookmarks(){
+    void crawlerBookmarks() {
     }
+
     @Pointcut("execution (* com.dong.demo.dao.TutorialsDao.crawlerMainBody(..))")
-    void crawlerMainBody(){
+    void crawlerMainBody() {
     }
+
     @Pointcut("execution (* com.dong.demo.dao.TutorialsDao.readModel(..))")
-    void readModel(){
+    void readModel() {
     }
+
     @Pointcut("execution (* com.dong.demo.dao.TutorialsDao.writeHTML(..))")
-    void writeHTML(){
+    void writeHTML() {
     }
+
     @After("crawlerMainBody()")
-    void crawlerMainBodyAfter(JoinPoint joinPoint){
+    void crawlerMainBodyAfter(JoinPoint joinPoint) {
         log.info("保存CrawlerUrl");
         Object[] objs = joinPoint.getArgs();
         for (Object obj : objs) {

@@ -15,23 +15,25 @@ import java.util.Collections;
 import java.util.List;
 
 /**
-* @author DONG
-* @description 针对表【crawler_url(爬虫url)】的数据库操作Service实现
-* @createDate 2021-12-27 14:07:57
-*/
+ * @author DONG
+ * @description 针对表【crawler_url(爬虫url)】的数据库操作Service实现
+ * @createDate 2021-12-27 14:07:57
+ */
 @Service
 public class CrawlerUrlServiceImpl extends ServiceImpl<CrawlerUrlMapper, CrawlerUrl>
-    implements CrawlerUrlService{
+        implements CrawlerUrlService {
     @Autowired
     RedisUtils redisUtils;
 
-    private  String setKey = "crawlerUrlFail";
+    private String setKey = "crawlerUrlFail";
+
     @Override
-    public List<CrawlerUrl>  getByIdAndName(int id , String name ){
+    public List<CrawlerUrl> getByIdAndName(int id, String name) {
         return list(new QueryWrapper<CrawlerUrl>().eq("crawle_id", id).eq("crawle_name", name));
     }
+
     @Override
-    public boolean saveOrUpdateByName(CrawlerUrl crawlerUrl){
+    public boolean saveOrUpdateByName(CrawlerUrl crawlerUrl) {
         return newSaveOrUpdate(crawlerUrl, new UpdateWrapper<CrawlerUrl>()
                 .eq("crawle_id", crawlerUrl.getCrawleId())
                 .eq("crawle_name", crawlerUrl.getCrawleName())
@@ -41,6 +43,7 @@ public class CrawlerUrlServiceImpl extends ServiceImpl<CrawlerUrlMapper, Crawler
 
     /**
      * 保存
+     *
      * @param entity
      * @param updateWrapper
      * @return
@@ -51,16 +54,17 @@ public class CrawlerUrlServiceImpl extends ServiceImpl<CrawlerUrlMapper, Crawler
 
     /**
      * 拿所有未爬虫成功的
+     *
      * @return
      */
-    List<CrawlerUrl> getAllFail(){
+    List<CrawlerUrl> getAllFail() {
         return list(new QueryWrapper<CrawlerUrl>().ne("crawle_status", 1).ne("crawle_status", 2));
     }
 
     /**
      * 拿到所有未成功爬虫的塞缓存
      */
-    void insertFailRedis(){
+    void insertFailRedis() {
         List<CrawlerUrl> allFail = getAllFail();
         redisUtils.setCacheSet(setKey, Collections.singleton(allFail));
     }

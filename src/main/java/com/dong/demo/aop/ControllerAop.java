@@ -19,8 +19,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ControllerAop {
     @Pointcut("execution (* com.dong.demo.controller.*.*(..))")
-    void all(){
+    void all() {
     }
+
     @Before("all()")
     void allBefore(JoinPoint joinPoint) {
         AopUtil.BeforeLog(joinPoint);

@@ -10,9 +10,10 @@ import java.io.Serializable;
 
 /**
  * 爬虫一些教程 需要存放的路径信息
+ *
  * @TableName tutorials_node
  */
-@TableName(value ="tutorials_node")
+@TableName(value = "tutorials_node")
 @Data
 public class TutorialsNode implements Serializable {
     /**
@@ -62,11 +63,11 @@ public class TutorialsNode implements Serializable {
         }
         TutorialsNode other = (TutorialsNode) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
-            && (this.getTutorialsStatus() == null ? other.getTutorialsStatus() == null : this.getTutorialsStatus().equals(other.getTutorialsStatus()))
-            && (this.getCrawleId() == null ? other.getCrawleId() == null : this.getCrawleId().equals(other.getCrawleId()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+                && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+                && (this.getTutorialsStatus() == null ? other.getTutorialsStatus() == null : this.getTutorialsStatus().equals(other.getTutorialsStatus()))
+                && (this.getCrawleId() == null ? other.getCrawleId() == null : this.getCrawleId().equals(other.getCrawleId()));
     }
 
     @Override

@@ -20,15 +20,16 @@ class TutorialsServiceImplTest {
     RedisUtils redisUtils;
     @Test
     void crawler() {
-        tutorialsService.crawler(1,"java教程");
+        tutorialsService.crawler(1, "java教程");
     }
+
     @Test
-    void test(){
-        String key = "tutorialsMapping:hash"+ 1;
+    void test() {
+        String key = "tutorialsMapping:hash" + 1;
         Set<Object> names = redisUtils.hmGetAll(key);
         for (Object name : names) {
-            log.info("删除 name : "+ name);
-            redisUtils.hmRemoveByKey(key,name);
+            log.info("删除 name : " + name);
+            redisUtils.hmRemoveByKey(key, name);
         }
     }
 

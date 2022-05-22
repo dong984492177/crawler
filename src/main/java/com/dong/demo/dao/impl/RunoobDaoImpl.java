@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * 菜鸟教程爬虫实现
+ *
  * @author Dong_Jia_Qi on 2022/3/17
  */
 
@@ -33,7 +34,7 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
         String url = tutorialsMapping.getUrl();
         Document document = 连接页面工具.getDocument(url);
         String fatherNodeName = tutorialsMapping.getName();
-        TutorialsNode fatherNode = tutorialsNodeService.getDbByName(id,fatherNodeName );
+        TutorialsNode fatherNode = tutorialsNodeService.getDbByName(id, fatherNodeName);
         fatherNode = getTutorialsNode(id, url, fatherNodeName, fatherNode);
         Element element = document.selectFirst(".col.middle-column-home");
         Elements aElements = element.select("a");
@@ -48,9 +49,9 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
             tutorialsNode.setCrawleId(id);
             tutorialsNode.setParentId(fatherNode.getId());
             List<TutorialsNode> list = tutorialsNodeService.list(new QueryWrapper<>(tutorialsNode));
-            if (list.size()==0) {
+            if (list.size() == 0) {
                 tutorialsNode.setTutorialsStatus(0);
-            }else {
+            } else {
                 tutorialsNode.setTutorialsStatus(list.get(0).getTutorialsStatus());
             }
 
@@ -59,7 +60,7 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
         Element element2 = document.selectFirst("#manual");
         Elements aElements2 = element2.select("a");
         for (Element aElement : aElements2) {
-            String text = aElement.text()+"手册";
+            String text = aElement.text() + "手册";
             text = text.replace("手册手册", "手册");
             String nodeUrl = aElement.attr("abs:href");
             TutorialsNode tutorialsNode = new TutorialsNode();
@@ -68,9 +69,9 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
             tutorialsNode.setCrawleId(id);
             tutorialsNode.setParentId(fatherNode.getId());
             List<TutorialsNode> list = tutorialsNodeService.list(new QueryWrapper<>(tutorialsNode));
-            if (list.size()==0) {
+            if (list.size() == 0) {
                 tutorialsNode.setTutorialsStatus(0);
-            }else {
+            } else {
                 tutorialsNode.setTutorialsStatus(list.get(0).getTutorialsStatus());
             }
 
@@ -97,7 +98,7 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
         crawlerUrl.setCrawleName(crawleName);
         crawlerUrl.setUrlText(crawleName + " 基础");
         crawlerUrl.setUrlGrade(2);
-        crawlerUrl.setCrawleOrder(list.size()+1);
+        crawlerUrl.setCrawleOrder(list.size() + 1);
         crawlerUrl.setCrawleStatus(0);
         list.add(crawlerUrl);
         //开始遍历
@@ -111,7 +112,7 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
                 h2CrawlerUrl.setCrawleName(crawleName);
                 h2CrawlerUrl.setUrlText(text);
                 h2CrawlerUrl.setUrlGrade(2);
-                h2CrawlerUrl.setCrawleOrder(list.size()+1);
+                h2CrawlerUrl.setCrawleOrder(list.size() + 1);
                 h2CrawlerUrl.setCrawleStatus(0);
                 list.add(h2CrawlerUrl);
                 continue;
@@ -125,7 +126,7 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
                 aCrawlerUrl.setUrl(href);
                 aCrawlerUrl.setUrlElement(element);
                 aCrawlerUrl.setUrlGrade(3);
-                aCrawlerUrl.setCrawleOrder(list.size()+1);
+                aCrawlerUrl.setCrawleOrder(list.size() + 1);
                 aCrawlerUrl.setCrawleStatus(0);
                 list.add(aCrawlerUrl);
                 continue;
@@ -138,26 +139,26 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
     public boolean crawlerMainBody(CrawlerUrl crawlerUrl) {
         try {
             Integer urlGrade = crawlerUrl.getUrlGrade();
-            switch (urlGrade){
-                case 2 : {
+            switch (urlGrade) {
+                case 2: {
                     Element tagByCrawlerUrl = getTagByCrawlerUrl(crawlerUrl);
                     crawlerUrl.setCrawlerText(tagByCrawlerUrl);
                     crawlerUrl.setCrawleStatus(1);
                     return true;
                 }
-                case 3 : {
+                case 3: {
                     Element urlElement = updateAToHTag(crawlerUrl);
                     String url1 = crawlerUrl.getUrl();
                     Document textDoc = 连接页面工具.getDocument(url1);
-                    if (textDoc != null){
+                    if (textDoc != null) {
                         Element textElement = textDoc.selectFirst(".article-body");
                         imgSrcToAbs(textElement);
                         imgHrefToAbs(textElement);
                         aHrefToAbs(textElement);
                         imgDataSrcToAbs(textElement);
                         updateHToBTag(textElement);
-                        updateToPreTag(textElement,".example_code");
-                        tagRemoveAttr(textElement,"pre","class");
+                        updateToPreTag(textElement, ".example_code");
+                        tagRemoveAttr(textElement, "pre", "class");
                         // tagRemoveAttr(textElement,"span","style");
                         // tagRemoveAttr(textElement,"td","style");
 
@@ -167,13 +168,12 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
                         crawlerUrl.setCrawlerText(element);
                         crawlerUrl.setCrawleStatus(1);
                         return true;
-                    }
-                    else {
+                    } else {
                         crawlerUrl.setCrawleStatus(3);
                         return false;
                     }
                 }
-                default:{
+                default: {
                     crawlerUrl.setCrawleStatus(3);
                     return false;
                 }
@@ -181,10 +181,10 @@ public class RunoobDaoImpl extends TutorialFather implements TutorialsDao {
         } catch (Exception e) {
             crawlerUrl.setCrawleStatus(4);
             crawlerUrl.setErrDescribe(e.getMessage());
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             return false;
-        }finally {
-            log.info("爬虫 {} {}  {}  结束" ,crawlerUrl.getCrawleId() ,crawlerUrl.getCrawleName(),crawlerUrl.getCrawleOrder());
+        } finally {
+            log.info("爬虫 {} {}  {}  结束", crawlerUrl.getCrawleId(), crawlerUrl.getCrawleName(), crawlerUrl.getCrawleOrder());
         }
     }
 }

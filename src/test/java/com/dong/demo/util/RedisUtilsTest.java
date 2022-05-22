@@ -3,10 +3,12 @@ package com.dong.demo.util;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 class RedisUtilsTest {
     @Autowired
     RedisUtils redisUtils;
+
     @Test
     void hmRemoveByKey() {
         redisUtils.hmRemoveByKey("tutorialsMapping:hash1", "More");

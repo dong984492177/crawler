@@ -24,7 +24,7 @@ import java.util.List;
 
 @Component("TutorialsDaoLiaoXueFengImpl")
 @Slf4j
-public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements TutorialsDao  {
+public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements TutorialsDao {
 
     @Override
     public boolean crawlerNode(int id, String appendStr) {
@@ -32,7 +32,7 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
         String url = tutorialsMapping.getUrl();
         Document document = 连接页面工具.getDocument(url);
         String fatherNodeName = tutorialsMapping.getName();
-        TutorialsNode fatherNode = tutorialsNodeService.getDbByName(id,fatherNodeName );
+        TutorialsNode fatherNode = tutorialsNodeService.getDbByName(id, fatherNodeName);
         //没有数据
         fatherNode = getTutorialsNode(id, url, fatherNodeName, fatherNode);
 
@@ -41,7 +41,7 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
         log.info(aElements.toString());
         for (Element aElement : aElements) {
             String text = aElement.text();
-            if (text.contains("文章")||text.contains("问答")||text.contains("More")){
+            if (text.contains("文章") || text.contains("问答") || text.contains("More")) {
                 continue;
             }
             String nodeUrl = aElement.attr("abs:href");
@@ -52,9 +52,9 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
             tutorialsNode.setCrawleId(id);
             tutorialsNode.setParentId(fatherNode.getId());
             List<TutorialsNode> list = tutorialsNodeService.list(new QueryWrapper<>(tutorialsNode));
-            if (list.size()==0) {
+            if (list.size() == 0) {
                 tutorialsNode.setTutorialsStatus(0);
-            }else {
+            } else {
                 tutorialsNode.setTutorialsStatus(list.get(0).getTutorialsStatus());
             }
             tutorialsNodeService.saveOrUpdateByName(tutorialsNode);
@@ -63,9 +63,8 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
     }
 
 
-
     @Override
-    public Element crawler(String url ) {
+    public Element crawler(String url) {
         Element div = null;
         Document document = 连接页面工具.getDocument(url);
         Element element = document.selectFirst("#x-wiki-index");
@@ -76,10 +75,10 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
     @Override
     public List<CrawlerUrl> crawlerBookmarks(Integer crawleId, String crawleName, Element div, List<CrawlerUrl> list) {
         String depth = div.attr("depth");
-        Integer urlGrade = Integer.valueOf(depth)+1;
+        Integer urlGrade = Integer.valueOf(depth) + 1;
         Elements elements = div.select(">a");
         //拿到标题连接
-        for (Element element:elements) {
+        for (Element element : elements) {
             String href = element.attr("abs:href");
             String text = element.text();
             CrawlerUrl crawlerUrl = new CrawlerUrl();
@@ -89,24 +88,25 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
             crawlerUrl.setUrl(href);
             crawlerUrl.setUrlElement(element);
             crawlerUrl.setUrlGrade(urlGrade);
-            crawlerUrl.setCrawleOrder(list.size()+1);
+            crawlerUrl.setCrawleOrder(list.size() + 1);
             crawlerUrl.setCrawleStatus(0);
             list.add(crawlerUrl);
         }
         //拿到子标签div
         Elements divSelect = div.select(">div");
         for (Element element : divSelect) {
-            crawlerBookmarks(crawleId,crawleName,element,list);
+            crawlerBookmarks(crawleId, crawleName, element, list);
         }
-        return  list;
+        return list;
     }
+
     @Override
     public boolean crawlerMainBody(CrawlerUrl crawlerUrl) {
         try {
             Element urlElement = updateAToHTag(crawlerUrl);
             String url1 = crawlerUrl.getUrl();
             Document textDoc = 连接页面工具.getDocument(url1);
-            if (textDoc != null){
+            if (textDoc != null) {
                 //获得核心内容
                 Element textElement = textDoc.selectFirst(".x-wiki-content");
                 imgSrcToAbs(textElement);
@@ -119,17 +119,17 @@ public class TutorialsDaoLiaoXueFengImpl extends TutorialFather implements Tutor
                 crawlerUrl.setCrawlerText(element);
                 crawlerUrl.setCrawleStatus(1);
                 return true;
-            }else {
+            } else {
                 crawlerUrl.setCrawleStatus(3);
                 return false;
             }
         } catch (Exception e) {
             crawlerUrl.setCrawleStatus(4);
             crawlerUrl.setErrDescribe(e.getMessage());
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             return false;
-        }finally {
-            log.info("爬虫 {} {}  {}  结束" ,crawlerUrl.getCrawleId() ,crawlerUrl.getCrawleName(),crawlerUrl.getCrawleOrder());
+        } finally {
+            log.info("爬虫 {} {}  {}  结束", crawlerUrl.getCrawleId(), crawlerUrl.getCrawleName(), crawlerUrl.getCrawleOrder());
         }
     }
 
